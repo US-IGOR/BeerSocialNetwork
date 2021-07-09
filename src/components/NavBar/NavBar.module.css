@@ -1,0 +1,16 @@
+.nav {
+    grid-area: n;
+    background-color: gray ;
+}
+.item {
+    color: white;
+}
+.active {
+    color:gold;
+    font-style: italic;
+    font-weight: bold;
+}
+/*
+.img {
+    width: 1000px;
+}*/
