@@ -3,7 +3,7 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Profile} from "./components/Profile/Profile";
-
+import Messages from "./components/Messages/Messages";
 
 const App = () => {
     return (
@@ -12,11 +12,15 @@ const App = () => {
 
                 <Header/>
                 <NavBar/>
-                <Profile/>
+                <div className='app_wraper_content'>
 
-                {/*    <footer className='footer'>
+                <Profile/>
+                <Messages/>
+                </div>
+
+                    <footer className='footer'>
                     <a href='http://nubo.ru/'> www.nubo.ru footer</a>
-                </footer>*/}
+                </footer>
             </div>
         </div>
     )
