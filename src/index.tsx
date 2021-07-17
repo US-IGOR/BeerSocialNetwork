@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import state from './Redux/State';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App
+        messagesDataUsers={state.messagePage.messagesDataUsers}
+        messagesDataText={state.messagePage.messagesDataText}
+        postDataText={state.postPage.postDataText}
+      /*  messagesDataText={messagesDataText}*/
+    />
 
 
 

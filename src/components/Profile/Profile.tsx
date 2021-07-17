@@ -3,18 +3,22 @@ import s from './Profile.module.css';
 import {MyPost} from "./MyPost/MyPost";
 import {ProfileInfo} from "./MyPost/ProfileInfo/ProfileInfo";
 
-let postDataText = [
-    {id: 1, post: 'Hi', qtyLike: 5},
-    {id: 2, post: 'Helol, whuts uuup?', qtyLike: 1},
-    {id: 3, post: 'How are you?', qtyLike: 2},
-]
 
+type PropsTypeProfile = {
 
-export const Profile = () => {
+    postDataText: Array<typeArrayMessagesPostDataText>
+}
+type typeArrayMessagesPostDataText = {
+    id: number
+    post: string
+    qtyLike: number
+}
+
+export const Profile = (props:PropsTypeProfile) => {
     return (
         <div >
             <ProfileInfo/>
-            <MyPost data={postDataText}/>
+            <MyPost postDataText={props.postDataText}/>
         </div>
     )
 }

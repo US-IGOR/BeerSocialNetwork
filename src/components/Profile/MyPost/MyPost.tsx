@@ -3,18 +3,20 @@ import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 
 
-type TypePostDataText = {
-    data: Array<typeArrayTypePostDataText>
-}
+type PropsTypeProfile = {
 
-type typeArrayTypePostDataText = {
+    postDataText: Array<typeArrayMessagesPostDataText>
+}
+type typeArrayMessagesPostDataText = {
     id: number
     post: string
     qtyLike: number
 }
 
 
-export const MyPost = (props:TypePostDataText) => {
+
+
+export const MyPost = (props:PropsTypeProfile) => {
     return (
         <div className={s.myPostBlock}>
             <div>
@@ -28,7 +30,7 @@ export const MyPost = (props:TypePostDataText) => {
                     </div>
                 </div>
                 <div className={s.post}>
-                    { props.data.map (m => <Post data={m.post} qtyLike={m.qtyLike}/> )}
+                    { props.postDataText.map (m => <Post data={m.post} qtyLike={m.qtyLike}/> )}
                 </div>
             </div>
         </div>

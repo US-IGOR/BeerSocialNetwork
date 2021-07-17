@@ -7,22 +7,54 @@ import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
 
-const App = () => {
+
+type PropsTypeApp = {
+    messagesDataUsers: Array<typeArrayMessagesDataUsers>
+    messagesDataText: Array<typeArrayMessagesDataText>
+    postDataText: Array<typeArrayProfilePostDataText>
+}
+type typeArrayMessagesDataUsers = {
+    id: number
+    name: string
+}
+type typeArrayMessagesDataText = {
+    id: number
+    textMessage: string
+}
+
+type typeArrayProfilePostDataText = {
+    id: number
+    post: string
+    qtyLike: number
+}
+
+
+const App = (props: PropsTypeApp) => {
     return (
         <BrowserRouter>
+
             <div className="App">
 
                 <div className='app-wraper'>
                     <Header/>
                     <NavBar/>
                     <div className='app_wraper_content'>
-                        <Route path={'/profile'} render={()=>  <Profile/>}/>
-                        <Route path={'/Messages'} render={()=>  <Messages/>}/>
-                        <Route path={'/Top10'} render={()=>  <Top10/>}/>
+                        <Route path={'/profile'}
+                               render={() =>
+                                   <Profile
+                                       postDataText={props.postDataText}
+                                   />}/>
+                        <Route path={'/Messages'}
+                               render={() =>
+                                   <Messages
+                                       messagesDataUsers={props.messagesDataUsers}
+                                       messagesDataText={props.messagesDataText}/>
+                               }/>
+                        <Route path={'/Top10'} render={() => <Top10/>}/>
 
                     </div>
 
-{/*                    <footer className='footer'>
+                    {/*                    <footer className='footer'>
                         <a href='http://nubo.ru/'> www.nubo.ru footer</a>
                     </footer>*/}
                 </div>
