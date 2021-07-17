@@ -16,9 +16,10 @@ const App = () => {
                     <Header/>
                     <NavBar/>
                     <div className='app_wraper_content'>
-                        <Route path={'/profile'} component={Profile}/>
-                        <Route path={'/Messages'} component={Messages}/>
-                        <Route path={'/Top10'} component={Top10}/>
+                        <Route path={'/profile'} render={()=>  <Profile/>}/>
+                        <Route path={'/Messages'} render={()=>  <Messages/>}/>
+                        <Route path={'/Top10'} render={()=>  <Top10/>}/>
+
                     </div>
 
 {/*                    <footer className='footer'>

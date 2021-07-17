@@ -1,6 +1,8 @@
 import React from "react";
 import s from './Post.module.css';
 
+
+
 type PostPropsType = {
     data?: string;
     qtyLike?: number;
