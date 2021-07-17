@@ -1,0 +1,42 @@
+.app-wraper {
+    display: grid;
+    grid-template-areas:
+"h h"
+"n c";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    /* grid-gap: 10px;*/
+}
+
+
+.app_wraper_content {
+    grid-area: c;
+    background-color: sandybrown;
+    height: 600px;
+}
+.app_wraper_content img {
+    width: 400px;
+}
+
+
+/*
+.grid {
+  display: grid;
+
+  grid-template-areas:
+"header header header"
+"nav content content";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+
+}
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-area: nav;
+}
+.content {
+  grid-area: content;
+}*/

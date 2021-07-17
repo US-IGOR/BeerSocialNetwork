@@ -12,7 +12,6 @@ type PropsTypeApp = {
     messagesDataUsers: Array<typeArrayMessagesDataUsers>
     messagesDataText: Array<typeArrayMessagesDataText>
     postDataText: Array<typeArrayProfilePostDataText>
-    addPost:(postText:string)=>void
 }
 type typeArrayMessagesDataUsers = {
     id: number
@@ -44,7 +43,6 @@ const App = (props: PropsTypeApp) => {
                                render={() =>
                                    <Profile
                                        postDataText={props.postDataText}
-                                       addPost={props.addPost}
                                    />}/>
                         <Route path={'/Messages'}
                                render={() =>

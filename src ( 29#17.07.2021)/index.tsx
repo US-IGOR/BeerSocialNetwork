@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {addPost} from './Redux/State';
+import state from './Redux/State';
 
 
 
@@ -13,8 +13,6 @@ ReactDOM.render(
         messagesDataUsers={state.messagePage.messagesDataUsers}
         messagesDataText={state.messagePage.messagesDataText}
         postDataText={state.postPage.postDataText}
-        addPost={addPost}
-
       /*  messagesDataText={messagesDataText}*/
     />
 
