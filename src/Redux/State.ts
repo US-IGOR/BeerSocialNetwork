@@ -21,10 +21,10 @@ type postPageType = {
 type sideBarType = {
 }
 
-type RootStateType = {
+export type RootStateType = {
     messagePage: messagePageType
     postPage:postPageType
-    sideBar: {}
+   /* sideBar: {}*/
 }
 
 export const addPost = (postText:string)=> {
@@ -59,7 +59,7 @@ let state:RootStateType = {
             {id: 3, post: 'How are you?', qtyLike: 2},
         ]
     },
-    sideBar: {}
+/*    sideBar: {}*/
 }
 export default state;
 

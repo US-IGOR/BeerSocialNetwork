@@ -10,18 +10,11 @@ import state, {addPost} from './Redux/State';
 ReactDOM.render(
   <React.StrictMode>
     <App
-        messagesDataUsers={state.messagePage.messagesDataUsers}
-        messagesDataText={state.messagePage.messagesDataText}
-        postDataText={state.postPage.postDataText}
+        state={state}
         addPost={addPost}
 
       /*  messagesDataText={messagesDataText}*/
     />
-
-
-
-
-
   </React.StrictMode>,
   document.getElementById('root')
 );

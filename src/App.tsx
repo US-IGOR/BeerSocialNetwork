@@ -7,30 +7,40 @@ import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
 
-
-type PropsTypeApp = {
-    messagesDataUsers: Array<typeArrayMessagesDataUsers>
-    messagesDataText: Array<typeArrayMessagesDataText>
-    postDataText: Array<typeArrayProfilePostDataText>
+type PropsTypeState = {
+    state: RootStateType
     addPost:(postText:string)=>void
 }
-type typeArrayMessagesDataUsers = {
+type messagesDataUsersType = {
     id: number
     name: string
 }
-type typeArrayMessagesDataText = {
+type messagesDataTextType = {
     id: number
     textMessage: string
 }
-
-type typeArrayProfilePostDataText = {
+type postDataTextType = {
     id: number
     post: string
     qtyLike: number
 }
+type messagePageType = {
+    messagesDataUsers: Array<messagesDataUsersType>
+    messagesDataText: Array<messagesDataTextType>
+}
+type postPageType = {
+    postDataText: Array<postDataTextType>
+}
+export type RootStateType = {
+    messagePage: messagePageType
+    postPage:postPageType
+
+}
 
 
-const App = (props: PropsTypeApp) => {
+
+
+const App = (props: PropsTypeState) => {
     return (
         <BrowserRouter>
 
@@ -43,14 +53,14 @@ const App = (props: PropsTypeApp) => {
                         <Route path={'/profile'}
                                render={() =>
                                    <Profile
-                                       postDataText={props.postDataText}
+                                       postDataText={props.state.postPage.postDataText}
                                        addPost={props.addPost}
                                    />}/>
                         <Route path={'/Messages'}
                                render={() =>
                                    <Messages
-                                       messagesDataUsers={props.messagesDataUsers}
-                                       messagesDataText={props.messagesDataText}/>
+                                       messagesDataUsers={props.state.messagePage.messagesDataUsers}
+                                       messagesDataText={props.state.messagePage.messagesDataText}/>
                                }/>
                         <Route path={'/Top10'} render={() => <Top10/>}/>
 
