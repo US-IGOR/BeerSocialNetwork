@@ -19,9 +19,13 @@ type typeArrayMessagesPostDataText = {
 export const MyPost = (props:PropsTypeProfile) => {
 
     let newPostElement=React.createRef<HTMLTextAreaElement>();
-    let addPost = () => {
-        props.addPost(newPostElement.current ? newPostElement.current.value:'----')
-    }
+    let localAddPost = () => {
+        props.addPost(newPostElement.current ? newPostElement.current.value:'----');
+       if (newPostElement.current !==null) {
+           newPostElement.current.value=''
+       }
+           }
+
 
     return (
         <div className={s.myPostBlock}>
@@ -32,11 +36,11 @@ export const MyPost = (props:PropsTypeProfile) => {
                         <textarea ref={newPostElement}></textarea>
                     </div>
                     <div>
-                        <button onClick={addPost}>add post</button>
+                        <button onClick={localAddPost}>add post</button>
                     </div>
                 </div>
                 <div className={s.post}>
-                    { props.postDataText.map (m => <Post data={m.post} qtyLike={m.qtyLike}/> )}
+                    { props.postDataText.map (m => <Post key={m.id} data={m.post} qtyLike={m.qtyLike}/> )}
                 </div>
             </div>
         </div>

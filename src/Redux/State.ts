@@ -1,3 +1,5 @@
+import {renderTree} from "../render";
+
 type messagesDataUsersType = {
     id: number
     name: string
@@ -27,17 +29,6 @@ export type RootStateType = {
    /* sideBar: {}*/
 }
 
-export const addPost = (postText:string)=> {
-    const newPost:postDataTextType = {
-        id:new Date().getTime(),
-        post: postText,
-        qtyLike: 0
-    };
-    state.postPage.postDataText.push(newPost);
-}
-
-
-
 
 let state:RootStateType = {
     messagePage: {
@@ -61,5 +52,17 @@ let state:RootStateType = {
     },
 /*    sideBar: {}*/
 }
+
+export const addPost = (postText:string)=> {
+    const newPost:postDataTextType = {
+        id:new Date().getTime(),
+        post: postText,
+        qtyLike: 0
+    };
+    state.postPage.postDataText.push(newPost);
+    renderTree(state);
+}
+
+
 export default state;
 

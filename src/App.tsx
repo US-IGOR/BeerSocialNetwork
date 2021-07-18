@@ -38,11 +38,9 @@ export type RootStateType = {
 }
 
 
-
-
 const App = (props: PropsTypeState) => {
     return (
-        <BrowserRouter>
+
 
             <div className="App">
 
@@ -71,7 +69,7 @@ const App = (props: PropsTypeState) => {
                     </footer>*/}
                 </div>
             </div>
-        </BrowserRouter>
+
     )
 }
 

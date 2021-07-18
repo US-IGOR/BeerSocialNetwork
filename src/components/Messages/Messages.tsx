@@ -28,7 +28,7 @@ const Messages = (props:PropsTypeMessages) => {
             </div>
             <div className={s.messages}>
                 {props.messagesDataText.map(m=>
-                    <MessagesText message={m.textMessage}/>)}
+                    <MessagesText key={m.id} message={m.textMessage}/>)}
             </div>
         </div>
     )
