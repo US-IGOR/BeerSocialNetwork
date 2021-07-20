@@ -6,10 +6,12 @@ import {Profile} from "./components/Profile/Profile";
 import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
+import {updNewPostText} from "./Redux/State";
 
 type PropsTypeState = {
     state: RootStateType
     addPost:(postText:string)=>void
+    updNewPostText:(updNewPostText:string)=>void
 }
 type messagesDataUsersType = {
     id: number
@@ -30,6 +32,7 @@ type messagePageType = {
 }
 type postPageType = {
     postDataText: Array<postDataTextType>
+    newPostText:string
 }
 export type RootStateType = {
     messagePage: messagePageType
@@ -53,12 +56,15 @@ const App = (props: PropsTypeState) => {
                                    <Profile
                                        postDataText={props.state.postPage.postDataText}
                                        addPost={props.addPost}
+                                       newPostText={props.state.postPage.newPostText}
+                                       updNewPostText={props.updNewPostText}
                                    />}/>
                         <Route path={'/Messages'}
                                render={() =>
                                    <Messages
                                        messagesDataUsers={props.state.messagePage.messagesDataUsers}
-                                       messagesDataText={props.state.messagePage.messagesDataText}/>
+                                       messagesDataText={props.state.messagePage.messagesDataText}
+                                   />
                                }/>
                         <Route path={'/Top10'} render={() => <Top10/>}/>
 

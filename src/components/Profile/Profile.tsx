@@ -8,6 +8,8 @@ import {addPost} from "../../Redux/State";
 type PropsTypeProfile = {
     postDataText: Array<typeArrayMessagesPostDataText>
     addPost:(postText:string)=>void
+    newPostText:string
+    updNewPostText:(updNewPostText:string)=>void
 }
 type typeArrayMessagesPostDataText = {
     id: number
@@ -24,6 +26,8 @@ export const Profile = (props:PropsTypeProfile) => {
             <MyPost
                 postDataText={props.postDataText}
                 addPost={addPost}
+                newPostText={props.newPostText}
+                updNewPostText={props.updNewPostText}
             />
         </div>
     )

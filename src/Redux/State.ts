@@ -19,6 +19,7 @@ type messagePageType = {
 }
 type postPageType = {
     postDataText: Array<postDataTextType>
+    newPostText: string
 }
 type sideBarType = {
 }
@@ -27,6 +28,23 @@ export type RootStateType = {
     messagePage: messagePageType
     postPage:postPageType
    /* sideBar: {}*/
+}
+
+
+
+
+export const addPost = (postText:string)=> {
+    const newPost:postDataTextType = {
+        id:new Date().getTime(),
+        post: postText,
+        qtyLike: 0
+    };
+    state.postPage.postDataText.push(newPost);
+    renderTree(state);
+}
+export const updNewPostText = (updNewPostText:string)=> {
+   state.postPage.newPostText=updNewPostText;
+    renderTree(state)
 }
 
 
@@ -48,19 +66,11 @@ let state:RootStateType = {
             {id: 1, post: 'Hi', qtyLike: 5},
             {id: 2, post: 'Helol, whuts uuup?', qtyLike: 1},
             {id: 3, post: 'How are you?', qtyLike: 2},
-        ]
-    },
-/*    sideBar: {}*/
-}
+        ],
+        newPostText: ''
 
-export const addPost = (postText:string)=> {
-    const newPost:postDataTextType = {
-        id:new Date().getTime(),
-        post: postText,
-        qtyLike: 0
-    };
-    state.postPage.postDataText.push(newPost);
-    renderTree(state);
+    },
+    /*    sideBar: {}*/
 }
 
 

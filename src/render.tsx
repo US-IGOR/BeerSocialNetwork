@@ -1,4 +1,4 @@
-import {addPost, RootStateType} from "./Redux/State";
+import {addPost, RootStateType, updNewPostText} from "./Redux/State";
 import ReactDOM from "react-dom";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
@@ -12,6 +12,7 @@ export const renderTree = (state: RootStateType) => {
                 <App
                     state={state}
                     addPost={addPost}
+                    updNewPostText={updNewPostText}
 
                     /*  messagesDataText={messagesDataText}*/
                 />
