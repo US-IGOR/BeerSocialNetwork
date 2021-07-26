@@ -1,4 +1,6 @@
-import {renderTree} from "../render";
+let renderTree = (state: RootStateType)=> {
+
+}
 
 type messagesDataUsersType = {
     id: number
@@ -32,22 +34,6 @@ export type RootStateType = {
 
 
 
-
-export const addPost = (postText:string)=> {
-    const newPost:postDataTextType = {
-        id:new Date().getTime(),
-        post: postText,
-        qtyLike: 0
-    };
-    state.postPage.postDataText.push(newPost);
-    renderTree(state);
-}
-export const updNewPostText = (updNewPostText:string)=> {
-   state.postPage.newPostText=updNewPostText;
-    renderTree(state)
-}
-
-
 let state:RootStateType = {
     messagePage: {
         messagesDataUsers: [
@@ -73,6 +59,23 @@ let state:RootStateType = {
     /*    sideBar: {}*/
 }
 
+
+export const addPost = (postText:string)=> {
+    const newPost:postDataTextType = {
+        id:new Date().getTime(),
+        post: postText,
+        qtyLike: 0
+    };
+    state.postPage.postDataText.push(newPost);
+    renderTree(state);
+}
+export const updNewPostText = (updNewPostText:string)=> {
+    state.postPage.newPostText=updNewPostText;
+    renderTree(state)
+}
+export const subscribe= (orb:any)=> {
+    renderTree=orb;
+}
 
 export default state;
 

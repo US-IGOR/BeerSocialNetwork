@@ -57,7 +57,7 @@ const App = (props: PropsTypeState) => {
                                        postDataText={props.state.postPage.postDataText}
                                        addPost={props.addPost}
                                        newPostText={props.state.postPage.newPostText}
-                                       updNewPostText={props.updNewPostText}
+                                       updNewPostText={updNewPostText}
                                    />}/>
                         <Route path={'/Messages'}
                                render={() =>
