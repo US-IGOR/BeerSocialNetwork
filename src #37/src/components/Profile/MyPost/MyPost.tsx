@@ -44,8 +44,6 @@ export const MyPost = (props: PropsTypeProfile) => {
                 </div>
                 <div className={s.post}>
                     {props.postDataText.map(m => <Post key={m.id} data={m.post} qtyLike={m.qtyLike}/>)}
-                    <h1>123</h1>
-                    <h1>123</h1>
                 </div>
             </div>
         </div>
