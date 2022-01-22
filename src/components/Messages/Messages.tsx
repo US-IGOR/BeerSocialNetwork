@@ -22,15 +22,21 @@ type typeArrayMessagesDataText = {
 
 const Messages = (props:PropsTypeMessages) => {
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                <DialogItem messagesDataUsers={props.messagesDataUsers}/>
+        <div>
+            --[Messages]--
+            <div className={s.dialogs}>
+
+                <div className={s.dialogsItems}>
+                    <DialogItem messagesDataUsers={props.messagesDataUsers}/>
+                </div>
+                <div className={s.messages}>
+                    {props.messagesDataText.map(m=>
+                        <MessagesText key={m.id} message={m.textMessage}/>)}
+                </div>
             </div>
-            <div className={s.messages}>
-                {props.messagesDataText.map(m=>
-                    <MessagesText key={m.id} message={m.textMessage}/>)}
-            </div>
+            --[Messages]--
         </div>
+
     )
 };
 

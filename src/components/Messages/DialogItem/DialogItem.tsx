@@ -26,7 +26,9 @@ type TypeArraymessagesDataUsers = {
 export const DialogItem = (props: propsTypeDialogItem) => {
     let messagesUsers = props.messagesDataUsers.map(d =>
         <div className={s.dialog}>
+            --[DialogItem]--
             <NavLink to={'/messges/' + d.id}>{d.name}</NavLink>
+
         </div>)
 
     return (

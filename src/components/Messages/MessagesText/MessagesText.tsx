@@ -8,6 +8,7 @@ type PropsTypeMessagesText = {
 export const MessagesText = (props: PropsTypeMessagesText) => {
     return (
         <div className={s.dialog}>
+            --[MessagesText]--
             {props.message}
         </div>
 

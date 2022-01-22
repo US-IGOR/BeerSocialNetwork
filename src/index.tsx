@@ -15,7 +15,7 @@ const onChange = () => {
         <React.StrictMode>
             <BrowserRouter>
                 <App
-                    store={store}
+                    store={store} dispatch={store.dispatch.bind(store)}
                     /*  messagesDataText={messagesDataText}*/
                 />
             </BrowserRouter>

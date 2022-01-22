@@ -10,6 +10,7 @@ import store, {storeType} from "./Redux/State";
 
 type PropsTypeState = {
     store: storeType
+    dispatch:any
 }
 type messagesDataUsersType = {
     id: number
@@ -55,9 +56,11 @@ const App = (props: PropsTypeState) => {
                                <Profile
 
                                    postDataText={props.store._state.postPage.postDataText}
-                                   addPost={props.store.addPost.bind(props.store)}
+                                   dispatch={props.dispatch}
                                    newPostText={props.store._state.postPage.newPostText}
-                                   updNewPostText={props.store.updNewPostText.bind(props.store)}
+
+                                   //addPost={props.store.addPost.bind(props.store)}
+                                   //updNewPostText={props.store.updNewPostText.bind(props.store)}
                                />}/>
                     <Route path={'/Messages'}
                            render={() =>

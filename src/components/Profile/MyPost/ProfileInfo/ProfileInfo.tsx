@@ -5,11 +5,16 @@ import s from './ProfileInfo.module.css';
 export const ProfileInfo = () => {
     return (
         <div>
-            <img
-                src='https://image.shutterstock.com/z/stock-vector-set-of-beer-poster-in-vintage-style-with-grunge-textures-and-beer-objects-vector-illustration-1060350398.jpg'/>
-            <div className={s.avaDiscription}>
-                ava+description
+            --[ProfileInfo]--
+            <div>
+                <img
+                    src='https://topspiski.com/wp-content/uploads/2018/01/1_drunk-robotos-poster-01447651416-700x393.jpg'/>
+
             </div>
+               <div className={s.avaDiscription}>
+                Bender
+            </div>
+            --[ProfileInfo]--
         </div>
     )
 }
