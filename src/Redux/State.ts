@@ -40,6 +40,9 @@ export  type storeType = {
     dispatch: (action: any) => void
 }
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 
 const store: storeType = {
     _state: {
@@ -101,7 +104,7 @@ const store: storeType = {
                 //  post: postText,
                 qtyLike: 0
             }
-            this._state.postPage.postDataText.push(newPost);
+            this._state.postPage.postDataText.unshift(newPost);
             this._callSubscriber();
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             {
@@ -111,8 +114,23 @@ const store: storeType = {
         }
     }
 
-
 }
+
+export const addPostAC = () => (
+    {
+        type: ADD_POST
+    }
+)
+export const updNewPostTextAC = (text: string) => (
+    {
+        type: UPDATE_NEW_POST_TEXT,
+        updNewPostText: text
+    }
+)
+
+
+//const fake = () => 5;  const fake = () => {return 5};
+
 
 export default store;
 

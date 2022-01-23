@@ -1,6 +1,7 @@
 import React from "react";
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
+import {addPostAC, updNewPostTextAC} from "../../../Redux/State";
 
 
 type PropsTypeProfile = {
@@ -20,16 +21,8 @@ type typeArrayMessagesPostDataText = {
 
 export const MyPost = (props: PropsTypeProfile) => {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-    let localAddPost = () => {
-        props.dispatch({type: 'ADD-POST'})
-
-
-        /*      (newPostElement.current ? newPostElement.current.value : '----');
-              if (newPostElement.current !== null) {
-                  newPostElement.current.value = ''
-              }*/
-    }
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
+    const localAddPost = () => {props.dispatch(addPostAC())}
 
     const onPostChange = () => {
 
@@ -38,8 +31,8 @@ export const MyPost = (props: PropsTypeProfile) => {
             newPostElement.current.value = '';
         }
 
-        let action = {type: 'UPDATE-NEW-POST-TEXT', updNewPostText: text};
-        props.dispatch(action)
+
+        props.dispatch(updNewPostTextAC(text))
 
     }
 
