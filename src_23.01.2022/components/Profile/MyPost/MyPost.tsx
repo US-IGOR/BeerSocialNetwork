@@ -47,7 +47,7 @@ export const MyPost = (props: PropsTypeProfile) => {
                         <textarea onChange={onPostChange}
                                   ref={newPostElement}
                                   value={props.newPostText}
-                                                          />
+                        />
                     </div>
                     <div>
                         <button onClick={localAddPost}>add post</button>

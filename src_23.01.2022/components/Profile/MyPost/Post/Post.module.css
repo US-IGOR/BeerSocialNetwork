@@ -1,0 +1,16 @@
+.item {
+    color: darkorchid;
+    font-weight: bold;
+}
+.item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+.like {
+    color: deeppink;
+    font-family: "Albertus Extra Bold";
+    font-weight: bold;
+    font-size: 18px;
+
+}

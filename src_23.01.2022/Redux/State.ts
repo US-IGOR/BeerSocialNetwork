@@ -14,7 +14,6 @@ type postDataTextType = {
 type messagePageType = {
     messagesDataUsers: Array<messagesDataUsersType>
     messagesDataText: Array<messagesDataTextType>
-    newMessageBody: string
 }
 type postPageType = {
     postDataText: Array<postDataTextType>
@@ -27,42 +26,22 @@ export type RootStateType = {
     /* sideBar: {}*/
 }
 
-
-export type addPostActionType = {
-    type: 'ADD-POST'
+type action = {
+    type: string
 }
-export type updNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    updNewPostText: string
-}
-export type updNewMessageBodyActionType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY',
-    newMessageBody: string
-}
-export type sendBodyActionType = {
-
-    type: 'SEND-BODY',
-    textMessage?: string,
-    id?: number
-}
-
 
 export  type storeType = {
     _state: RootStateType
+    /*addPost: (postText: string) => void
+    updNewPostText: (updNewPostText: string) => void*/
     subscribe: (orb: () => void) => void
     _callSubscriber: () => void
     getState: () => RootStateType
-    dispatch: (action: addPostActionType
-        | updNewPostTextActionType
-        | updNewMessageBodyActionType
-        | sendBodyActionType ) => void
+    dispatch: (action: any) => void
 }
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-BODY';
 
 
 const store: storeType = {
@@ -75,10 +54,9 @@ const store: storeType = {
             ],
             messagesDataText: [
                 {id: 1, textMessage: 'Hi'},
-                {id: 2, textMessage: 'Hello, whats up?'},
+                {id: 2, textMessage: 'Helol, whuts uuup?'},
                 {id: 3, textMessage: 'How are you?'},
-            ],
-            newMessageBody: ''
+            ]
         },
         postPage: {
             postDataText: [
@@ -102,8 +80,22 @@ const store: storeType = {
         this._callSubscriber = orb;
     },
 
-    dispatch (action: addPostActionType | updNewPostTextActionType | updNewMessageBodyActionType|sendBodyActionType) { // type: 'ADD-POST'
-        if ('ADD-POST' === action.type) {
+    /*    addPost(postText: string) {
+            const newPost: postDataTextType = {
+                id: new Date().getTime(),
+                post: postText,
+                qtyLike: 0
+            };
+            this._state.postPage.postDataText.push(newPost);
+            this._callSubscriber();
+        },
+        updNewPostText(updNewPostText: string) {
+            this._state.postPage.newPostText = updNewPostText;
+            this._callSubscriber()
+        },*/
+
+    dispatch(action) { // type: 'ADD-POST'
+        if (action.type === 'ADD-POST') {
             debugger
             const newPost: postDataTextType = {
                 id: new Date().getTime(),
@@ -114,26 +106,15 @@ const store: storeType = {
             }
             this._state.postPage.postDataText.unshift(newPost);
             this._callSubscriber();
-        } else if
-        (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             {
                 this._state.postPage.newPostText = action.updNewPostText;
                 this._callSubscriber()
             }
-        } else if
-        (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-           this._state.messagePage.newMessageBody = action.newMessageBody
-            this._callSubscriber()
-        } else if
-        (action.type === 'SEND-BODY') {
-            let body = this._state.messagePage.newMessageBody
-            this._state.messagePage.newMessageBody = ''
-            this._state.messagePage.messagesDataText.push({id: 9, textMessage: body})
-            this._callSubscriber()
         }
     }
-}
 
+}
 
 export const addPostAC = () => (
     {
@@ -144,19 +125,6 @@ export const updNewPostTextAC = (text: string) => (
     {
         type: UPDATE_NEW_POST_TEXT,
         updNewPostText: text
-    }
-)
-export const updMessageBodyAC = (text: string) => (
- {
-
-        type: UPDATE_NEW_MESSAGE_BODY,
-     newMessageBody: text
-    }
-)
-export const sendMessageAC = () => (
-    {
-        type: SEND_MESSAGE
-
     }
 )
 

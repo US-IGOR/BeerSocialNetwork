@@ -65,8 +65,8 @@ const App = (props: PropsTypeState) => {
                     <Route path={'/Messages'}
                            render={() =>
                                <Messages
-                                  store={props.store}
-                                  dispatch={props.dispatch}
+                                   messagesDataUsers={props.store._state.messagePage.messagesDataUsers}
+                                   messagesDataText={props.store._state.messagePage.messagesDataText}
                                />
                            }/>
                     <Route path={'/Top10'} render={() => <Top10/>}/>
