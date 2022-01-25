@@ -9,7 +9,7 @@ type PropsTypeProfile = {
     // addPost: (postText: string) => void
     newPostText: string
     //  updNewPostText: (updNewPostText: string) => void
-    dispatch: (action: any) => void
+    dispatch: (action: any) => void  //actionsTypes
 }
 type typeArrayMessagesPostDataText = {
     id: number

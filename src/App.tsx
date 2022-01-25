@@ -56,7 +56,7 @@ const App = (props: PropsTypeState) => {
                                <Profile
 
                                    postDataText={props.store._state.postPage.postDataText}
-                                   dispatch={props.dispatch}
+                                   dispatch={props.store.dispatch.bind(props.store)}
                                    newPostText={props.store._state.postPage.newPostText}
 
                                    //addPost={props.store.addPost.bind(props.store)}

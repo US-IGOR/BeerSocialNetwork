@@ -24,6 +24,8 @@ const onChange = () => {
     );
 }
 
+
+
 onChange();
 store.subscribe(onChange)
 

@@ -2,6 +2,7 @@ import React from "react";
 import s from './Profile.module.css';
 import {MyPost} from "./MyPost/MyPost";
 import {ProfileInfo} from "./MyPost/ProfileInfo/ProfileInfo";
+import {actionsTypes} from "../../Redux/State";
 
 
 
@@ -11,7 +12,7 @@ type PropsTypeProfile = {
     //addPost:(postText:string)=>void
     newPostText:string
    // updNewPostText:(updNewPostText:string)=>void
-    dispatch:(action:any)=>void
+    dispatch:(action:actionsTypes)=>void
 }
 type typeArrayMessagesPostDataText = {
     id: number

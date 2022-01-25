@@ -28,35 +28,18 @@ export type RootStateType = {
 }
 
 
-export type addPostActionType = {
-    type: 'ADD-POST'
-}
-export type updNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    updNewPostText: string
-}
-export type updNewMessageBodyActionType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY',
-    newMessageBody: string
-}
-export type sendBodyActionType = {
-
-    type: 'SEND-BODY',
-    textMessage?: string,
-    id?: number
-}
-
-
 export  type storeType = {
     _state: RootStateType
     subscribe: (orb: () => void) => void
     _callSubscriber: () => void
     getState: () => RootStateType
-    dispatch: (action: addPostActionType
-        | updNewPostTextActionType
-        | updNewMessageBodyActionType
-        | sendBodyActionType ) => void
+    dispatch: (action: actionsTypes) => void
 }
+
+export type actionsTypes = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updNewPostTextAC>
+    | ReturnType<typeof updMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -91,20 +74,22 @@ const store: storeType = {
         },
         /*    sideBar: {}*/
     },
-    _callSubscriber() {
+    _callSubscriber() {   // OnChange
+
         console.log('state changed')
     },
+    subscribe(orb: () => void) {
+
+        this._callSubscriber = orb;
+    },
+
 
     getState() {
         return this._state;
     },
-    subscribe(orb: () => void) {
-        this._callSubscriber = orb;
-    },
-
-    dispatch (action: addPostActionType | updNewPostTextActionType | updNewMessageBodyActionType|sendBodyActionType) { // type: 'ADD-POST'
+    dispatch(action: actionsTypes) { // type: 'ADD-POST'
         if ('ADD-POST' === action.type) {
-            debugger
+
             const newPost: postDataTextType = {
                 id: new Date().getTime(),
                 post: this._state.postPage.newPostText,
@@ -122,7 +107,7 @@ const store: storeType = {
             }
         } else if
         (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-           this._state.messagePage.newMessageBody = action.newMessageBody
+            this._state.messagePage.newMessageBody = action.newMessageBody
             this._callSubscriber()
         } else if
         (action.type === 'SEND-BODY') {
@@ -138,26 +123,26 @@ const store: storeType = {
 export const addPostAC = () => (
     {
         type: ADD_POST
-    }
+    } as const
 )
 export const updNewPostTextAC = (text: string) => (
     {
         type: UPDATE_NEW_POST_TEXT,
         updNewPostText: text
-    }
+    } as const
 )
 export const updMessageBodyAC = (text: string) => (
- {
+    {
 
         type: UPDATE_NEW_MESSAGE_BODY,
-     newMessageBody: text
-    }
+        newMessageBody: text
+    } as const
 )
 export const sendMessageAC = () => (
     {
         type: SEND_MESSAGE
 
-    }
+    } as const
 )
 
 
