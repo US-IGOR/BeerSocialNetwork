@@ -6,10 +6,10 @@ import {Profile} from "./components/Profile/Profile";
 import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
-import store, {storeType} from "./Redux/State";
+import store, {storeType} from "./Redux/Store";
 
 type PropsTypeState = {
-    store: storeType
+    store: any
     dispatch:any
 }
 type messagesDataUsersType = {
@@ -42,7 +42,10 @@ export type RootStateType = {
 
 const App = (props: PropsTypeState) => {
     const state=props.store.getState();
+    console.log(props)
+    debugger
     return (
+
 
 
         <div className="App">
@@ -55,9 +58,9 @@ const App = (props: PropsTypeState) => {
                            render={() =>
                                <Profile
 
-                                   postDataText={props.store._state.postPage.postDataText}
+                                   postDataText={state.postPage.postDataText}
                                    dispatch={props.store.dispatch.bind(props.store)}
-                                   newPostText={props.store._state.postPage.newPostText}
+                                   newPostText={state.postPage.newPostText}
 
                                    //addPost={props.store.addPost.bind(props.store)}
                                    //updNewPostText={props.store.updNewPostText.bind(props.store)}

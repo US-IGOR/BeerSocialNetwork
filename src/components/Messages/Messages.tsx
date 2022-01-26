@@ -4,7 +4,7 @@ import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
 import {sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
-import {storeType} from "../../Redux/State";
+import {storeType} from "../../Redux/Store";
 
 
 type PropsTypeMessages = {

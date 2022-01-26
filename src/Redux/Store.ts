@@ -1,6 +1,3 @@
-//!!!!!!!!!!!!!!!!! 25 min
-
-
 import ProfileReducer, {actionsProfileReducerTypes} from "./ProfileReducer";
 import MessageReducer, {actionsMessagesReducerTypes} from "./MessagesReducer";
 
@@ -26,13 +23,11 @@ export type postPageType = {
     postDataText: Array<postDataTextType>
     newPostText: string
 }
-type sideBarType = {}
 export type RootStateType = {
     messagePage: messagePageType
     postPage: postPageType
     /* sideBar: {}*/
 }
-
 
 export  type storeType = {
     _state: RootStateType
@@ -41,7 +36,6 @@ export  type storeType = {
     getState: () => RootStateType
     dispatch: (action: actionsTypes) => void
 }
-
 export type actionsTypes = actionsProfileReducerTypes | actionsMessagesReducerTypes
 
 
@@ -69,34 +63,22 @@ const store: storeType = {
             newPostText: ''
 
         },
-        /*    sideBar: {}*/
     },
     _callSubscriber() {   // OnChange
-
         console.log('state changed')
     },
     subscribe(orb: () => void) {
-
         this._callSubscriber = orb;
     },
-
-
     getState() {
         return this._state;
     },
     dispatch(action: any) { // type: 'ADD-POST'
-
-
         this._state.postPage = ProfileReducer(this._state.postPage, action)
         this._state.messagePage = MessageReducer(this._state.messagePage, action)
-        //     this._callSubscriber(this._state)
         this._callSubscriber()
     }
 }
-
-
-//const fake = () => 5;  const fake = () => {return 5};
-
 
 export default store;
 

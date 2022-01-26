@@ -1,11 +1,26 @@
-import {messagePageType} from "./State";
+import {messagePageType} from "./Store";
 
 export type actionsMessagesReducerTypes =
     ReturnType<typeof updMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
 
 
-const MessageReducer = (state: messagePageType, action: actionsMessagesReducerTypes) => {
+let initialState:messagePageType =  {
+
+        messagesDataUsers: [
+            {id: 1, name: 'Igor'},
+            {id: 2, name: 'Evgenia'},
+            {id: 3, name: 'Roma'},
+        ],
+        messagesDataText: [
+            {id: 1, textMessage: 'Hi'},
+            {id: 2, textMessage: 'Hello, whats up?'},
+            {id: 3, textMessage: 'How are you?'},
+        ],
+        newMessageBody: ''
+    };
+
+const MessageReducer = (state: messagePageType = initialState, action: actionsMessagesReducerTypes) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
