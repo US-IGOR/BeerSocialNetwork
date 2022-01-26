@@ -3,7 +3,8 @@ import {NavLink} from "react-router-dom";
 import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
-import { sendMessageAC, storeType, updMessageBodyAC} from "../../Redux/State";
+import {sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
+import {storeType} from "../../Redux/State";
 
 
 type PropsTypeMessages = {
@@ -21,7 +22,7 @@ type typeArrayMessagesDataText = {
 
 
 const Messages = (props: PropsTypeMessages) => {
-    const state=props.store.getState().messagePage;
+    const state = props.store.getState().messagePage;
 
     let newMessageBody = state.newMessageBody
     let dialogElements = state.messagesDataUsers
@@ -33,8 +34,8 @@ const Messages = (props: PropsTypeMessages) => {
         props.dispatch(sendMessageAC())
     }
     let onNewMessageChange = (e: any) => {
-       let bodyMessage = String(e.target.value);
-        props.dispatch (updMessageBodyAC(bodyMessage))
+        let bodyMessage = String(e.target.value);
+        props.dispatch(updMessageBodyAC(bodyMessage))
     }
 
     return (
@@ -52,8 +53,8 @@ const Messages = (props: PropsTypeMessages) => {
             </div>
             <div>
                 <textarea placeholder={'Enter your message'}
-    value={newMessageBody}
-    onChange={onNewMessageChange}/>
+                          value={newMessageBody}
+                          onChange={onNewMessageChange}/>
 
 
                 <div>

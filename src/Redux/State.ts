@@ -1,3 +1,9 @@
+//!!!!!!!!!!!!!!!!! 25 min
+
+
+import ProfileReducer, {actionsProfileReducerTypes} from "./ProfileReducer";
+import MessageReducer, {actionsMessagesReducerTypes} from "./MessagesReducer";
+
 type messagesDataUsersType = {
     id: number
     name: string
@@ -11,12 +17,12 @@ type postDataTextType = {
     post: string
     qtyLike: number
 }
-type messagePageType = {
+export type messagePageType = {
     messagesDataUsers: Array<messagesDataUsersType>
     messagesDataText: Array<messagesDataTextType>
     newMessageBody: string
 }
-type postPageType = {
+export type postPageType = {
     postDataText: Array<postDataTextType>
     newPostText: string
 }
@@ -36,16 +42,7 @@ export  type storeType = {
     dispatch: (action: actionsTypes) => void
 }
 
-export type actionsTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof updNewPostTextAC>
-    | ReturnType<typeof updMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-BODY';
+export type actionsTypes = actionsProfileReducerTypes | actionsMessagesReducerTypes
 
 
 const store: storeType = {
@@ -87,63 +84,15 @@ const store: storeType = {
     getState() {
         return this._state;
     },
-    dispatch(action: actionsTypes) { // type: 'ADD-POST'
-        if ('ADD-POST' === action.type) {
+    dispatch(action: any) { // type: 'ADD-POST'
 
-            const newPost: postDataTextType = {
-                id: new Date().getTime(),
-                post: this._state.postPage.newPostText,
 
-                //  post: postText,
-                qtyLike: 0
-            }
-            this._state.postPage.postDataText.unshift(newPost);
-            this._callSubscriber();
-        } else if
-        (action.type === 'UPDATE-NEW-POST-TEXT') {
-            {
-                this._state.postPage.newPostText = action.updNewPostText;
-                this._callSubscriber()
-            }
-        } else if
-        (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-            this._state.messagePage.newMessageBody = action.newMessageBody
-            this._callSubscriber()
-        } else if
-        (action.type === 'SEND-BODY') {
-            let body = this._state.messagePage.newMessageBody
-            this._state.messagePage.newMessageBody = ''
-            this._state.messagePage.messagesDataText.push({id: 9, textMessage: body})
-            this._callSubscriber()
-        }
+        this._state.postPage = ProfileReducer(this._state.postPage, action)
+        this._state.messagePage = MessageReducer(this._state.messagePage, action)
+        //     this._callSubscriber(this._state)
+        this._callSubscriber()
     }
 }
-
-
-export const addPostAC = () => (
-    {
-        type: ADD_POST
-    } as const
-)
-export const updNewPostTextAC = (text: string) => (
-    {
-        type: UPDATE_NEW_POST_TEXT,
-        updNewPostText: text
-    } as const
-)
-export const updMessageBodyAC = (text: string) => (
-    {
-
-        type: UPDATE_NEW_MESSAGE_BODY,
-        newMessageBody: text
-    } as const
-)
-export const sendMessageAC = () => (
-    {
-        type: SEND_MESSAGE
-
-    } as const
-)
 
 
 //const fake = () => 5;  const fake = () => {return 5};
