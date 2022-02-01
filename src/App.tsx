@@ -6,11 +6,20 @@ import {Profile} from "./components/Profile/Profile";
 import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
+<<<<<<< HEAD
+import store, {actionsTypes, storeType} from "./Redux/Store";
+import MessagesContainer from "./components/Messages/MessagesContainer";
+
+type PropsTypeState = {
+    store: any
+    dispatch: (action: actionsTypes) => void
+=======
 import store, {storeType} from "./Redux/Store";
 
 type PropsTypeState = {
     store: any
     dispatch:any
+>>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
 }
 type messagesDataUsersType = {
     id: number
@@ -41,6 +50,9 @@ export type RootStateType = {
 
 
 const App = (props: PropsTypeState) => {
+<<<<<<< HEAD
+    return (
+=======
     const state=props.store.getState();
     console.log(props)
     debugger
@@ -48,6 +60,7 @@ const App = (props: PropsTypeState) => {
 
 
 
+>>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
         <div className="App">
 
             <div className='app-wraper'>
@@ -57,19 +70,22 @@ const App = (props: PropsTypeState) => {
                     <Route path={'/profile'}
                            render={() =>
                                <Profile
+<<<<<<< HEAD
+                                   store={props.store}
+                                   dispatch={props.store.dispatch.bind(props.store)}
+=======
 
                                    postDataText={state.postPage.postDataText}
                                    dispatch={props.store.dispatch.bind(props.store)}
                                    newPostText={state.postPage.newPostText}
+>>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
 
-                                   //addPost={props.store.addPost.bind(props.store)}
-                                   //updNewPostText={props.store.updNewPostText.bind(props.store)}
                                />}/>
                     <Route path={'/Messages'}
                            render={() =>
-                               <Messages
-                                  store={props.store}
-                                  dispatch={props.dispatch}
+                               <MessagesContainer
+                                   store={props.store}
+                                   dispatch={props.store.dispatch.bind(props.store)}
                                />
                            }/>
                     <Route path={'/Top10'} render={() => <Top10/>}/>

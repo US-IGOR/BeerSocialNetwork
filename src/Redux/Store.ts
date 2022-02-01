@@ -9,7 +9,7 @@ type messagesDataTextType = {
     id: number
     textMessage: string
 }
-type postDataTextType = {
+export type postDataTextType = {
     id: number
     post: string
     qtyLike: number

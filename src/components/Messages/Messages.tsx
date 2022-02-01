@@ -4,38 +4,33 @@ import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
 import {sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
+<<<<<<< HEAD
+import {messagePageType, RootStateType, storeType} from "../../Redux/Store";
+=======
 import {storeType} from "../../Redux/Store";
+>>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
 
 
 type PropsTypeMessages = {
-    store: storeType
-    dispatch: (action: any) => void
+    updMessageBody: (action: any) => void
+    onSendMessage: () => void
+    messagePage: messagePageType
 }
-type typeArrayMessagesDataUsers = {
-    id: number
-    name: string
-}
-type typeArrayMessagesDataText = {
-    id: number
-    textMessage: string
-}
-
 
 const Messages = (props: PropsTypeMessages) => {
-    const state = props.store.getState().messagePage;
+    const state = props.messagePage;
 
     let newMessageBody = state.newMessageBody
     let dialogElements = state.messagesDataUsers
-    let messagesElements = state.messagesDataText.map(m =>
-        <MessagesText key={m.id} message={m.textMessage}/>)
+    let messagesElements = state.messagesDataText.map(m => <MessagesText key={m.id} message={m.textMessage}/>)
 
     let onSendMessageClick = () => {
-        console.log(sendMessageAC())
-        props.dispatch(sendMessageAC())
+        props.onSendMessage()
     }
     let onNewMessageChange = (e: any) => {
         let bodyMessage = String(e.target.value);
-        props.dispatch(updMessageBodyAC(bodyMessage))
+        props.updMessageBody(bodyMessage)
+
     }
 
     return (

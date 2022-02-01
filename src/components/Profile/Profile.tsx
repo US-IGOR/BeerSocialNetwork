@@ -1,39 +1,43 @@
 import React from "react";
-import s from './Profile.module.css';
-import {MyPost} from "./MyPost/MyPost";
 import {ProfileInfo} from "./MyPost/ProfileInfo/ProfileInfo";
+<<<<<<< HEAD
+import {actionsTypes, storeType} from "../../Redux/Store";
+import {MyPostContainer} from "./MyPost/MyPostContainer";
+=======
 import {actionsTypes} from "../../Redux/Store";
 
+>>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
 
 
 type PropsTypeProfile = {
+    store: storeType
 
-    postDataText: Array<typeArrayMessagesPostDataText>
+    // postDataText: Array<typeArrayMessagesPostDataText>
     //addPost:(postText:string)=>void
-    newPostText:string
-   // updNewPostText:(updNewPostText:string)=>void
-    dispatch:(action:actionsTypes)=>void
-}
-type typeArrayMessagesPostDataText = {
-    id: number
-    post: string
-    qtyLike: number
+    // newPostText:string
+    // updNewPostText:(updNewPostText:string)=>void
+    dispatch: (action: actionsTypes) => void
 }
 
 
-
-export const Profile = (props:PropsTypeProfile) => {
+export const Profile = (props: PropsTypeProfile) => {
+    console.log('1')
     return (
-        <div >
+        <div>
             --[Profile]--
 
             <ProfileInfo/>
-            <MyPost
-                postDataText={props.postDataText}
+            <MyPostContainer
+                store={props.store}
+
+
+                //postDataText={props.postDataText}
+                //newPostText={props.newPostText}
+                //dispatch={props.dispatch}
+
+
                 //addPost={props.addPost}
-                newPostText={props.newPostText}
-               // updNewPostText={props.updNewPostText}
-                dispatch={props.dispatch}
+                // updNewPostText={props.updNewPostText}
             />
             --[Profile]--
         </div>
