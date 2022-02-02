@@ -1,12 +1,7 @@
 import React from "react";
 import {ProfileInfo} from "./MyPost/ProfileInfo/ProfileInfo";
-<<<<<<< HEAD
 import {actionsTypes, storeType} from "../../Redux/Store";
 import {MyPostContainer} from "./MyPost/MyPostContainer";
-=======
-import {actionsTypes} from "../../Redux/Store";
-
->>>>>>> 9a3106a28fc1128c1ee200ec731c6a41fc07457c
 
 
 type PropsTypeProfile = {
