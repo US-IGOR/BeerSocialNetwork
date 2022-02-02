@@ -3,10 +3,9 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Profile} from "./components/Profile/Profile";
-import Messages from "./components/Messages/Messages";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
-import store, {actionsTypes, storeType} from "./Redux/Store";
+import {actionsTypes} from "./Redux/Store";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 
 type PropsTypeState = {
@@ -41,7 +40,7 @@ export type RootStateType = {
 }
 
 
-const App = (props: PropsTypeState) => {
+const App = () => {
     return (
         <div className="App">
 
@@ -52,17 +51,10 @@ const App = (props: PropsTypeState) => {
                 <div className='app_wraper_content'>
                     <Route path={'/profile'}
                            render={() =>
-                               <Profile
-                                   store={props.store}
-                                   dispatch={props.store.dispatch.bind(props.store)}
-
-                               />}/>
+                               <Profile/>}/>
                     <Route path={'/Messages'}
                            render={() =>
-                               <MessagesContainer
-                                   store={props.store}
-                                   dispatch={props.store.dispatch.bind(props.store)}
-                               />
+                               <MessagesContainer/>
                            }/>
                     <Route path={'/Top10'} render={() => <Top10/>}/>
 

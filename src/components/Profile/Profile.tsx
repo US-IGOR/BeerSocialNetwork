@@ -4,18 +4,7 @@ import {actionsTypes, storeType} from "../../Redux/Store";
 import {MyPostContainer} from "./MyPost/MyPostContainer";
 
 
-type PropsTypeProfile = {
-    store: storeType
-
-    // postDataText: Array<typeArrayMessagesPostDataText>
-    //addPost:(postText:string)=>void
-    // newPostText:string
-    // updNewPostText:(updNewPostText:string)=>void
-    dispatch: (action: actionsTypes) => void
-}
-
-
-export const Profile = (props: PropsTypeProfile) => {
+export const Profile = () => {
     console.log('1')
     return (
         <div>
@@ -23,16 +12,6 @@ export const Profile = (props: PropsTypeProfile) => {
 
             <ProfileInfo/>
             <MyPostContainer
-                store={props.store}
-
-
-                //postDataText={props.postDataText}
-                //newPostText={props.newPostText}
-                //dispatch={props.dispatch}
-
-
-                //addPost={props.addPost}
-                // updNewPostText={props.updNewPostText}
             />
             --[Profile]--
         </div>
