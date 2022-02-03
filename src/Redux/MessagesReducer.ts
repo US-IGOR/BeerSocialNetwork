@@ -1,38 +1,54 @@
-import {messagePageType} from "./Store";
+
 
 export type actionsMessagesReducerTypes =
     ReturnType<typeof updMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
 
+export type DialogsType = {
+    id: number,
+    name: string
+}
+export type messagesType = {
+    id: number,
+    textMessage: string
+}
 
-let initialState:messagePageType =  {
 
-        messagesDataUsers: [
-            {id: 1, name: 'Igor'},
-            {id: 2, name: 'Evgenia'},
-            {id: 3, name: 'Roma'},
-        ],
-        messagesDataText: [
-            {id: 1, textMessage: 'Hi'},
-            {id: 2, textMessage: 'Hello, whats up?'},
-            {id: 3, textMessage: 'How are you?'},
-        ],
-        newMessageBody: ''
-    };
+let initialState = {
 
-const MessageReducer = (state: messagePageType = initialState, action: actionsMessagesReducerTypes) => {
+    dialogs: [
+        {id: 1, name: 'Igor'},
+        {id: 2, name: 'Evgenia'},
+        {id: 3, name: 'Roma'},
+    ] as Array <DialogsType>,
+    messages: [
+        {id: 1, textMessage: 'Hi'},
+        {id: 2, textMessage: 'Hello, whats up?'},
+        {id: 3, textMessage: 'How are you?'},
+    ] as Array <messagesType>,
+    newMessageBody: ''
+};
 
+export type  messagePageType = typeof initialState;
+
+
+
+
+const MessageReducer = (state: messagePageType = initialState, action: actionsMessagesReducerTypes):messagePageType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newMessageBody
-            return state
-
+            return {
+                ...state,
+                newMessageBody: action.newMessageBody
+            };
         case SEND_MESSAGE:
+            let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 9, textMessage: body}],
 
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messagesDataText.push({id: 9, textMessage: body})
-            return state
+            };
         default :
             return state
 

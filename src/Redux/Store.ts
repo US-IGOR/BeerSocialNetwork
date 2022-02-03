@@ -9,17 +9,17 @@ type messagesDataTextType = {
     id: number
     textMessage: string
 }
-export type postDataTextType = {
+type postDataTextType = {
     id: number
     post: string
     qtyLike: number
 }
-export type messagePageType = {
-    messagesDataUsers: Array<messagesDataUsersType>
-    messagesDataText: Array<messagesDataTextType>
+ type messagePageType = {
+    dialogs: Array<messagesDataUsersType>
+    messages: Array<messagesDataTextType>
     newMessageBody: string
 }
-export type postPageType = {
+type postPageType = {
     postDataText: Array<postDataTextType>
     newPostText: string
 }
@@ -42,12 +42,12 @@ export type actionsTypes = actionsProfileReducerTypes | actionsMessagesReducerTy
 const store: storeType = {
     _state: {
         messagePage: {
-            messagesDataUsers: [
+            dialogs: [
                 {id: 1, name: 'Igor'},
                 {id: 2, name: 'Evgenia'},
                 {id: 3, name: 'Roma'},
             ],
-            messagesDataText: [
+            messages: [
                 {id: 1, textMessage: 'Hi'},
                 {id: 2, textMessage: 'Hello, whats up?'},
                 {id: 3, textMessage: 'How are you?'},

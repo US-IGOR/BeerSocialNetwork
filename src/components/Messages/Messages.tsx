@@ -1,29 +1,24 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {NavLink} from "react-router-dom";
 import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
-import {sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
-import {messagePageType, RootStateType, storeType} from "../../Redux/Store";
+import {messagePageType, sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
+import { RootStateType, storeType} from "../../Redux/Store";
+import {MessagesPropsType} from "./MessagesContainer";
 
 
-type PropsTypeMessages = {
-    updMessageBody: (action: any) => void
-    onSendMessage: () => void
-    messagePage: messagePageType
-}
-
-const Messages = (props: PropsTypeMessages) => {
+const Messages = (props: MessagesPropsType) => {
     const state = props.messagePage;
 
     let newMessageBody = state.newMessageBody
-    let dialogElements = state.messagesDataUsers
-    let messagesElements = state.messagesDataText.map(m => <MessagesText key={m.id} message={m.textMessage}/>)
+    let dialogElements = state.dialogs
+    let messagesElements = state.messages.map(m => <MessagesText key={m.id} message={m.textMessage}/>)
 
     let onSendMessageClick = () => {
         props.onSendMessage()
     }
-    let onNewMessageChange = (e: any) => {
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let bodyMessage = String(e.target.value);
         props.updMessageBody(bodyMessage)
 

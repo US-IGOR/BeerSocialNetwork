@@ -1,27 +1,40 @@
 import React from "react";
-import {sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
-import  {RootStateType} from "../../Redux/Store";
+import {messagePageType, sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
 import Messages from "./Messages";
 import {connect} from "react-redux";
+import {AppStateType} from "../../Redux/reduxStore";
+import {Dispatch} from "redux";
 
-let mapStateToProps= (state:RootStateType) => {
+type mapStateToPropsType = {
+    messagePage: messagePageType
+}
+type mapDispatchToPropsType = {
+    updMessageBody: (bodyMessage: string) => void,
+    onSendMessage: () => void
+}
+
+export type MessagesPropsType = mapStateToPropsType &  mapDispatchToPropsType
+
+
+
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         messagePage: state.messagePage
     }
 }
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     return {
-        updMessageBody: (bodyMessage: string)=> {
+        updMessageBody: (bodyMessage: string) => {
             dispatch(updMessageBodyAC(bodyMessage))
         },
-        onSendMessage: ()=> {
+        onSendMessage: () => {
             dispatch(sendMessageAC())
         }
 
     }
 }
 
-const MessagesContainer = connect(mapStateToProps,mapDispatchToProps)(Messages);
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
 
 
 export default MessagesContainer;

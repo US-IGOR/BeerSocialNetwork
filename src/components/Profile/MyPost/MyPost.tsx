@@ -1,33 +1,10 @@
 import React from "react";
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
-import {addPostAC, updNewPostTextAC} from "../../../Redux/ProfileReducer";
-import {postDataTextType, postPageType, storeType} from "../../../Redux/Store";
+import {MyPostType} from "./MyPostContainer";
 
 
-type PropsTypeProfile = {
-    addPost: () => void
-    updNewPostText: (updNewPostText: string) => void
-    postDataText:Array<postDataTextType>
-    newPostText: string
-
-
-
-  //  postDataText: Array<typeArrayMessagesPostDataText>
-
-   // newPostText: string
-
-   // dispatch: (action: any) => void  //actionsTypes
-}
-type typeArrayMessagesPostDataText = {
-    id: number
-    post: string
-    qtyLike: number
-
-}
-
-
-export const MyPost = (props: PropsTypeProfile) => {
+export const MyPost = (props: MyPostType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 

@@ -1,4 +1,4 @@
-import {postPageType} from "./Store";
+
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -7,21 +7,30 @@ export type actionsProfileReducerTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof updNewPostTextAC>
 
 
+export type postPageType = {
+    postDataText: Array<postDataTextType>
+    newPostText: string
+}
+export type postDataTextType = {
+    id: number
+    post: string
+    qtyLike: number
+}
+
+
 let initialState: postPageType = {
     postDataText: [
         {id: 1, post: 'Hi', qtyLike: 5},
-        {id: 2, post: 'Helol, whuts uuup?', qtyLike: 1},
+        {id: 2, post: 'Hello, whats up?', qtyLike: 1},
         {id: 3, post: 'How are you?', qtyLike: 2},
     ],
     newPostText: ''
 }
 
 
-const ProfileReducer = (state: postPageType = initialState, action: actionsProfileReducerTypes) => {
-
+const ProfileReducer = (state: postPageType = initialState, action: actionsProfileReducerTypes):postPageType => {
 
     switch (action.type) {
-
         case ADD_POST : {
             let newPost =
                 {
@@ -30,26 +39,21 @@ const ProfileReducer = (state: postPageType = initialState, action: actionsProfi
                     //  post: postText,
                     qtyLike: 0
                 }
-            let stateCopy = {...state}
-            stateCopy.postDataText = [...state.postDataText]
-            stateCopy.newPostText = ''
-            stateCopy.postDataText.unshift(newPost);
-
-            return stateCopy
+            return {
+                ...state,
+                postDataText: [newPost, ...state.postDataText],
+                newPostText: '',
+            }
         }
-
-        case UPDATE_NEW_POST_TEXT:{
-
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.updNewPostText;
-            return stateCopy
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.updNewPostText
+            }
         }
         default :
             return state
-
     }
-
-
 }
 
 export const addPostAC = () => (
