@@ -7,6 +7,8 @@ import {Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
 import {actionsTypes} from "./Redux/Store";
 import MessagesContainer from "./components/Messages/MessagesContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
+
 
 type PropsTypeState = {
     store: any
@@ -52,12 +54,13 @@ const App = () => {
                     <Route path={'/profile'}
                            render={() =>
                                <Profile/>}/>
-                    <Route path={'/Messages'}
+                    <Route path={'/messages'}
                            render={() =>
                                <MessagesContainer/>
                            }/>
-                    <Route path={'/Top10'} render={() => <Top10/>}/>
+                    <Route path={'/top10'} render={() => <Top10/>}/>
 
+                    <Route path={'/users'} render={() => <UsersContainer/>}/>
                 </div>
 
                 {/*                    <footer className='footer'>

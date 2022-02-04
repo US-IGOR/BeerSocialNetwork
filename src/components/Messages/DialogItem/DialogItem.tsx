@@ -26,7 +26,7 @@ export const DialogItem = (props: propsTypeDialogItem) => {
     let messagesElements = props.messagesDataUsers.map(d =>
         <div className={s.dialog}>
 
-            <NavLink to={'/messges/' + d.id}>{d.name}</NavLink>
+            <NavLink to={'/messages/' + d.id}>{d.name}</NavLink>
 
         </div>)
 
