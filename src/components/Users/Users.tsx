@@ -3,20 +3,21 @@ import {UsersPropsType} from "./UsersContainer";
 import style from './users.module.css';
 import {ava1, ava2, ava3, ava4} from "../../Redux/UsersReducer";
 import axios from "axios";
+import userPhoto from "../../assets/images/nullUser.jpg"
 
 export const Users = (props: UsersPropsType) => {
 
-if (props.users.length === 0) {
+    if (props.users.length === 0) {
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-        props.setUsers(
-            response.data.items
-        )
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(
+                response.data.items
+            )
 
-    })
+        })
 
 
-}
+    }
 
 
     return (
@@ -26,7 +27,8 @@ if (props.users.length === 0) {
                 props.users.map(m => <div key={m.id}>
                     <div>
                         <div>
-                            <img src={m.photoUrl} className={style.userPhoto}/>
+                            <img src={m.photos.small !== null ? m.photos.small : userPhoto}
+                                 className={style.userPhoto}/>
                         </div>
                         <div>
                             {m.followed

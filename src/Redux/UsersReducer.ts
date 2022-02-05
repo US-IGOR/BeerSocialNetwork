@@ -21,7 +21,7 @@ export type userType = {
     name: string,
     status: string,
     location: locationType
-    photoUrl:string
+    photos:any
 }
 export type locationType ={
     country: string
