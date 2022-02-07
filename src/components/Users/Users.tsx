@@ -6,23 +6,21 @@ import axios from "axios";
 import userPhoto from "../../assets/images/nullUser.jpg"
 
 export const Users = (props: UsersPropsType) => {
-
-    if (props.users.length === 0) {
-
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(
-                response.data.items
-            )
-
-        })
+let getUsers = ()=> {   if (props.users.length === 0) {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        props.setUsers(
+            response.data.items
+        )
+    })
+}}
 
 
-    }
 
 
     return (
 
         <div>
+            <button onClick={getUsers}>get USERS</button>
             {
                 props.users.map(m => <div key={m.id}>
                     <div>
