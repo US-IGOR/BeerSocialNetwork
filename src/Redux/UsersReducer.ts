@@ -8,12 +8,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
+const SET_IS_FETCHING = 'SET-IS-FETCHING';
 
 export type actionsProfileReducerTypes = ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>;
+    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof setIsFetchingAC>;
 
 
 export type initialStateType = {
@@ -21,6 +23,7 @@ export type initialStateType = {
     pageSize:number
     totalUsersCount:number
     currentPage:number
+    isFetching:boolean
 
 }
 export type userType = {
@@ -44,6 +47,7 @@ let initialState: initialStateType  = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 2,
+    isFetching: true,
 
 
 }
@@ -93,6 +97,11 @@ const UsersReducer = (state: initialStateType = initialState, action: actionsPro
                 ...state,
                 totalUsersCount:  action.totalCount}
 
+        case SET_IS_FETCHING :
+
+            return {
+                ...state,
+                isFetching: action.isFetching }
 
 
         default :
@@ -105,6 +114,7 @@ export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const
 export const setUsersAC = (users: Array<userType>) => ({type: SET_USERS,users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE,currentPage} as const)
 export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT,totalCount} as const)
+export const setIsFetchingAC = (isFetching:boolean) => ({type: SET_IS_FETCHING,isFetching} as const)
 
 
 

@@ -12,6 +12,7 @@ type usersType = {
     users: Array<userType>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
+    //isFetching:boolean
 }
 
 export const Users = (props: usersType) => {
