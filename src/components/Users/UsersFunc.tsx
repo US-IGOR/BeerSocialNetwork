@@ -1,41 +1,26 @@
 import React from "react";
+import {UsersPropsType} from "./UsersContainer";
 import style from './users.module.css';
+import axios from "axios";
 import userPhoto from "../../assets/images/nullUser.jpg"
-import {userType} from "../../Redux/UsersReducer";
 
-type usersType = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    setCurrentPage: number
-    changedCurrentPageHandler: (p: number)=>void
-    users: Array<userType>
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-}
+export const UsersFunc = (props: UsersPropsType) => {
+let getUsers = ()=> {   if (props.users.length === 0) {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        props.setUsers(
+            response.data.items
+        )
+    })
+}}
 
-export const Users = (props: usersType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
 
 
     return (
-        <div>
-            <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p ? style.selectedPage : ''}
-                                 onClick={(e) => {
-                                     props.changedCurrentPageHandler(p)
-                                 }}
-                    >{p + ','}</span>
-                })}
-            </div>
-            {
 
+        <div>
+            <button onClick={getUsers}>get USERS</button>
+            {
                 props.users.map(m => <div key={m.id}>
                     <div>
                         <div>
@@ -50,6 +35,7 @@ export const Users = (props: usersType) => {
                                 : <button onClick={() => {
                                     props.follow(m.id)
                                 }}>Follow</button>}
+
                         </div>
                     </div>
                     <div>
@@ -57,9 +43,22 @@ export const Users = (props: usersType) => {
                             <div>{m.name}</div>
                             <div>{m.status}</div>
                         </div>
+                        <span>
+<div>
+    {'m.location.country'}
+</div>
+<div>
+    {'m.location.city'}
+</div>
+
+        </span>
+
                     </div>
+
+
                 </div>)
             }
+
         </div>
     )
 }

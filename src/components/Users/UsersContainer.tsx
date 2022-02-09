@@ -1,8 +1,9 @@
 import React from "react";
+import axios from "axios";
+import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
-import {Users} from "./UsersClass";
 import {
     followAC,
     setCurrentPageAC,
@@ -11,7 +12,6 @@ import {
     unfollowAC,
     userType
 } from "../../Redux/UsersReducer";
-
 
 type mapStateToPropsType = {
     users: Array<userType>,
@@ -26,8 +26,43 @@ type mapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void,
     setTotalUsersCount: (totalCount: number) => void,
 }
-
 export type UsersPropsType = mapStateToPropsType &  mapDispatchToPropsType
+
+
+export class UsersAPIComponent extends React.Component<any> {
+    constructor(props: any) {
+        super(props);
+    }
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            })
+    }
+    changedCurrentPageHandler = (p: number) => {
+        this.props.setCurrentPage(p)
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(
+                    response.data.items
+                )
+            })
+    }
+    render() {
+        return <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            setCurrentPage={this.props.setCurrentPage}
+            changedCurrentPageHandler={this.changedCurrentPageHandler}
+            users={this.props.users}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
+        />
+    }
+} //second container component, class type
 
 
 
@@ -63,4 +98,4 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
