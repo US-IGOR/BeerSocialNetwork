@@ -22,6 +22,8 @@ type postDataTextType = {
 type postPageType = {
     postDataText: Array<postDataTextType>
     newPostText: string
+
+    profile: null
 }
 export type RootStateType = {
     messagePage: messagePageType
@@ -60,7 +62,9 @@ const store: storeType = {
                 {id: 2, post: 'Helol, whuts uuup?', qtyLike: 1},
                 {id: 3, post: 'How are you?', qtyLike: 2},
             ],
-            newPostText: ''
+            newPostText: '',
+
+            profile: null
 
         },
     },

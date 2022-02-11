@@ -2,14 +2,16 @@
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 export type actionsProfileReducerTypes = ReturnType<typeof addPostAC>
-    | ReturnType<typeof updNewPostTextAC>
+    | ReturnType<typeof updNewPostTextAC>| ReturnType<typeof setUserProfile>
 
 
 export type postPageType = {
     postDataText: Array<postDataTextType>
     newPostText: string
+    profile:any
 }
 export type postDataTextType = {
     id: number
@@ -24,7 +26,8 @@ let initialState: postPageType = {
         {id: 2, post: 'Hello, whats up?', qtyLike: 1},
         {id: 3, post: 'How are you?', qtyLike: 2},
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 
@@ -51,22 +54,20 @@ const ProfileReducer = (state: postPageType = initialState, action: actionsProfi
                 newPostText: action.updNewPostText
             }
         }
+
+        case SET_USER_PROFILE : {
+
+            return { ...state,  profile: action.profile   }
+        }
+
         default :
             return state
     }
 }
 
-export const addPostAC = () => (
-    {
-        type: ADD_POST
-    } as const
-)
-export const updNewPostTextAC = (text: string) => (
-    {
-        type: UPDATE_NEW_POST_TEXT,
-        updNewPostText: text
-    } as const
-)
+export const addPostAC = () => ({type: ADD_POST} as const)
+export const updNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT,updNewPostText: text} as const)
+export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE,profile} as const)
 
 
 export default ProfileReducer;

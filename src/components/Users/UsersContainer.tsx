@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from "../../assets/images/loader.gif"
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage, setIsFetching,
