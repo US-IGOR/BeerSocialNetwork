@@ -4,11 +4,12 @@ import {Preloader} from "../../../common/Preloader/Preloader";
 
 
 export const ProfileInfo = (props:any) => {
-    //if (props.profile == null || props.profile)
+    if (props.profile == null || props.profile)
 
     console.log(props.profile)
 
-    if (!props.profile) {
+    // if (!props.profile)
+    {
         return <Preloader/>
     }
 
