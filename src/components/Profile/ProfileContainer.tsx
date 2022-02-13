@@ -44,7 +44,7 @@ type PathParamsType = {
 }
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-
+console.log('test')
 
 debugger
 function ProfileContainer(props: PropsType) {
