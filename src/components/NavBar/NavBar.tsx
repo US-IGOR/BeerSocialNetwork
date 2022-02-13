@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./NavBar.module.css";
 
-console.log(s);
 
 export const NavBar = () => {
     return (

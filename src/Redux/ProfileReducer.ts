@@ -58,6 +58,7 @@ const ProfileReducer = (state: postPageType = initialState, action: actionsProfi
         case SET_USER_PROFILE : {
 
             return { ...state,  profile: action.profile   }
+
         }
 
         default :
@@ -67,7 +68,7 @@ const ProfileReducer = (state: postPageType = initialState, action: actionsProfi
 
 export const addPostAC = () => ({type: ADD_POST} as const)
 export const updNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT,updNewPostText: text} as const)
-export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE,profile} as const)
+export const setUserProfile = (p: any) => ({type: SET_USER_PROFILE,profile:p} as const)
 
 
 export default ProfileReducer;

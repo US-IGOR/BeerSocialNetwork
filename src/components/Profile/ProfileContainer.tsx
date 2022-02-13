@@ -7,37 +7,34 @@ import {setUserProfile} from "../../Redux/ProfileReducer";
 
 class ProfileContainer extends React.Component<any> {
 
-     componentDidMount() {
+    componentDidMount() {
 
-         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-             .then(response => {
-                 this.props.setUserProfile(response.data);
-             })
-         console.log(this.props.profile)
-     }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(response => {
+            //    debugger
+                this.props.setUserProfile(response.data);
+
+            })
+
+    }
 
 
-     render () {
+    render() {
+        {
+          //  debugger
+        }
+        return (<Profile
+            {...this.props}
+          props={this.props.profile}
+        />)
 
-       return (
-           <div>
-               --[Profile]--
-
-               <Profile  {...this.props} profile={  this.props.profile}  />
-
-               {
-                   console.log(this.props.profile)
-               }
-           </div>
-       )
-
-   }
+    }
 
 }
 
-let mapStateToProps = (state:any) => ({
-    profile: state.profile
+let mapStateToProps = (state: any) => ({
+   profile: state.postPage.profile
 })
 
 
-export default connect (mapStateToProps, {setUserProfile}) (ProfileContainer)
+export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)

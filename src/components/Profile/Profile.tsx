@@ -8,15 +8,12 @@ type ProfileType = {
 }
 
 export const Profile = (props:any) => {
-    console.log('1')
+
     return (
         <div>
-            --[Profile]--
 
-            <ProfileInfo profile={props.profile}/>
-            <MyPostContainer
-            />
-            --[Profile]--
+            <ProfileInfo profile={props.props}/>
+            <MyPostContainer  />
         </div>
     )
 }
