@@ -45,7 +45,7 @@ const App = () => {
                 <NavBar/>
 
                 <div className='app_wraper_content'>
-                    <Route path={'/profile'}
+                    <Route path={'/profile/:userId?'} // '?'  options
                            render={() =>
                                <ProfileContainer/>}/>
                     <Route path={'/messages'}
