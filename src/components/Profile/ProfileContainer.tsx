@@ -22,7 +22,7 @@ type photosType = {
     small: string,
     large: string
 }
-type ProfileType =  null | {
+type ProfileType = null | {
 
     userId?: number
     lookingForAJob?: boolean
@@ -33,10 +33,10 @@ type ProfileType =  null | {
 }
 
 type MSTPType = {
-    profile:ProfileType
+    profile: ProfileType
 }
 type MDTPType = {
-    setUserProfile: (profile:ProfileType)=>void
+    setUserProfile: (profile: ProfileType) => void
 }
 type OwnPropsType = MSTPType & MDTPType
 type PathParamsType = {
@@ -45,8 +45,6 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
-
-debugger
 function ProfileContainer(props: PropsType) {
 
     useEffect(() => {
@@ -54,35 +52,29 @@ function ProfileContainer(props: PropsType) {
         if (!userId) {
             userId = "2"
         }
-        debugger
         ;
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 props.setUserProfile(response.data)
             })
-        debugger
     }, [])
-    debugger
     return (
         <Profile profile={props.profile}/>
     )
 }
-debugger
-let mapStateToProps = (state: RootStateType):MSTPType => ({
+
+let mapStateToProps = (state: RootStateType): MSTPType => ({
     profile: state.postPage.profile
 })
 
-
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-
 export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
-debugger
+
 
 /*
 
 class ProfileContainer extends React.Component<any> {
-
     componentDidMount() {
         debugger
         let userId = this.props.match.params.userId;
@@ -91,7 +83,6 @@ class ProfileContainer extends React.Component<any> {
                 this.props.setUserProfile(response.data);
             })
     }
-
     render() {
         {
         }

@@ -28,8 +28,17 @@ type postPageType = {
 export type RootStateType = {
     messagePage: messagePageType
     postPage: postPageType
+    auth:authType
     /* sideBar: {}*/
 }
+
+
+type authType = {
+    id: null | number,
+    email: null | string,
+    login: null| string,
+    isAuth: boolean
+};
 
 export  type storeType = {
     _state: RootStateType
@@ -62,10 +71,17 @@ const store: storeType = {
                 {id: 2, post: 'Helol, whuts uuup?', qtyLike: 1},
                 {id: 3, post: 'How are you?', qtyLike: 2},
             ],
+
             newPostText: '',
 
             profile: null
 
+        },
+        auth: {
+            id: 1,
+            email: '1',
+            login: '1',
+            isAuth: false
         },
     },
     _callSubscriber() {   // OnChange

@@ -7,6 +7,7 @@ import {Top10} from "./components/Top10/Top10";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type messagesDataUsersType = {
     id: number
@@ -41,7 +42,7 @@ const App = () => {
         <div className="App">
 
             <div className='app-wraper'>
-                <Header/>
+                <HeaderContainer/>
                 <NavBar/>
 
                 <div className='app_wraper_content'>
