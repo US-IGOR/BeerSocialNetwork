@@ -13,8 +13,7 @@ type mapDispatchToPropsType = {
     onSendMessage: () => void
 }
 
-export type MessagesPropsType = mapStateToPropsType &  mapDispatchToPropsType
-
+export type MessagesPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -22,7 +21,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         messagePage: state.messagePage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         updMessageBody: (bodyMessage: string) => {
             dispatch(updMessageBodyAC(bodyMessage))

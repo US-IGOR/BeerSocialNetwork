@@ -1,10 +1,7 @@
 import React, {ChangeEvent} from "react";
-import {NavLink} from "react-router-dom";
 import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
-import {messagePageType, sendMessageAC, updMessageBodyAC} from "../../Redux/MessagesReducer";
-import { RootStateType, storeType} from "../../Redux/Store";
 import {MessagesPropsType} from "./MessagesContainer";
 
 
@@ -26,8 +23,6 @@ const Messages = (props: MessagesPropsType) => {
 
     return (
         <div>
-
-            --[Messages]--
             <div className={s.dialogs}>
 
                 <div className={s.dialogsItems}>
@@ -48,7 +43,6 @@ const Messages = (props: MessagesPropsType) => {
                 </div>
 
             </div>
-            --[Messages]--
         </div>
 
     )

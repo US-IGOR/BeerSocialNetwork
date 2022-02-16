@@ -7,8 +7,8 @@ import {RootStateType} from "../../Redux/Store";
 
 
 type MSTPStateType = {
-    isAuth:boolean ,
-    login:string
+    isAuth:boolean,
+    login:string | null
 }
 
 
@@ -46,10 +46,10 @@ const HeaderContainer = (props:PropsType )=> {
     )
 }
 
-const MSTP = (state:RootStateType ):MSTPType => ({
+const MapStateToProps = (state:RootStateType ):MSTPStateType => ({
     isAuth: state.auth.isAuth ,
     login: state.auth.login
 })
 
 debugger
-export default connect (MSTP, {setAuthUserData}) (HeaderContainer)
+export default connect (MapStateToProps, {setAuthUserData}) (HeaderContainer)
