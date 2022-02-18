@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import style from './users.module.css';
 import userPhoto from "../../assets/images/nullUser.jpg"
-import {unfollow, userType} from "../../Redux/UsersReducer";
+import {userType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 
@@ -14,7 +14,9 @@ type usersType = {
     users: Array<userType>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    //isFetching:boolean
+    setIsFetchingProgress:(followingInProgress: boolean, id:number) => void
+    followingInProgress:[]
+
 }
 
 export const Users = (props: usersType) => {
@@ -31,7 +33,7 @@ export const Users = (props: usersType) => {
             <div>
                 {pages.map(p => {
                     return <span className={props.currentPage === p ? style.selectedPage : ''}
-                                 onClick={(e) => {
+                                 onClick={() => {
                                      props.changedCurrentPageHandler(p)
                                  }}
                     >{p + ','}</span>
@@ -44,12 +46,14 @@ export const Users = (props: usersType) => {
                         <div>
                             <NavLink to={'/profile/' + m.id}>
                                 <img src={m.photos.small !== null ? m.photos.small : userPhoto}
-                                     className={style.userPhoto}/>
+                                     className={style.userPhoto} alt={'img not found'} />
                             </NavLink>
                         </div>
                         <div>
                             {m.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id=>id===m.id)} onClick={() => {
+
+                                    props.setIsFetchingProgress(true,m.id);
                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`,
                                         {
                                             withCredentials: true,
@@ -62,12 +66,13 @@ export const Users = (props: usersType) => {
                                             if (response.data.resultCode ===0) {
                                                 props.unFollow(m.id)
                                             }
+                                            props.setIsFetchingProgress(false, m.id);
                                         })
 
                                 }}>Unfollow</button>
 
-                                : <button onClick={() => {
-
+                                : <button disabled={props.followingInProgress.some(id=>id===m.id)}  onClick={() => {
+                                    props.setIsFetchingProgress(true,m.id);
                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {},
                                         {withCredentials: true,
                                             headers: {
@@ -78,6 +83,7 @@ export const Users = (props: usersType) => {
                                             if (response.data.resultCode === 0) {
                                                 props.follow(m.id)
                                             }
+                                            props.setIsFetchingProgress(false,m.id);
                                         })
 
                                 }}>Follow</button>}

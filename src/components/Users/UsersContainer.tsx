@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {
     follow,
-    setCurrentPage, setIsFetching,
+    setCurrentPage, setIsFetching, setIsFetchingProgress,
     setTotalUsersCount,
     setUsers,
     unfollow,
@@ -20,6 +19,7 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<any>
 }
 type mapDispatchToPropsType = {
     follow: (userId: number) => void,
@@ -72,7 +72,8 @@ class UserContainer extends React.Component<any> {
                 users={this.props.users}
                 follow={this.props.follow}
                 unFollow={this.props.unfollow}
-                //    isFetching={this.props.isFetching}
+                setIsFetchingProgress={this.props.setIsFetchingProgress}
+                followingInProgress={this.props.followingInProgress}
             />
 
         </>
@@ -90,6 +91,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 /*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
@@ -121,4 +123,4 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching,})(UserContainer);
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching,setIsFetchingProgress})(UserContainer);

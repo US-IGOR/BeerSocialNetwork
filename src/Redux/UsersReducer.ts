@@ -9,13 +9,15 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const SET_IS_FETCHING = 'SET-IS-FETCHING';
+const SET_IS_FETCHING_PROGRESS = 'SET-IS-FETCHING-PROGRESS';
 
 export type actionsProfileReducerTypes = ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof setIsFetching>;
+    | ReturnType<typeof setIsFetching>
+    | ReturnType<typeof setIsFetchingProgress>;
 
 
 export type initialStateType = {
@@ -24,6 +26,7 @@ export type initialStateType = {
     totalUsersCount:number
     currentPage:number
     isFetching:boolean
+    followingInProgress:Array<any>
 
 }
 export type userType = {
@@ -48,8 +51,7 @@ let initialState: initialStateType  = {
     totalUsersCount: 0,
     currentPage: 2,
     isFetching: true,
-
-
+    followingInProgress: []
 }
 
 
@@ -103,6 +105,19 @@ const UsersReducer = (state: initialStateType = initialState, action: actionsPro
                 ...state,
                 isFetching: action.isFetching }
 
+        case SET_IS_FETCHING_PROGRESS:
+            return {
+            ...state,
+                followingInProgress: action.followingInProgress
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+
+
+            }
+
+
+
+
 
         default :
             return state
@@ -115,6 +130,7 @@ export const setUsers = (users: Array<userType>) => ({type: SET_USERS,users} as 
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE,currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT,totalCount} as const)
 export const setIsFetching = (isFetching:boolean) => ({type: SET_IS_FETCHING,isFetching} as const)
+export const setIsFetchingProgress = (followingInProgress:boolean,userId: number) => ({type: SET_IS_FETCHING_PROGRESS,followingInProgress,userId} as const)
 
 
 
