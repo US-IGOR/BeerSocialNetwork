@@ -6,7 +6,7 @@ type headerType = any
 
 
 export const Header = (props: headerType) => {
-    debugger
+
     return (
         <header className={s.header}>
 

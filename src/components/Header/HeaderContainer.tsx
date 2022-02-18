@@ -40,7 +40,7 @@ const HeaderContainer = (props:PropsType )=> {
             })
     }, [])
 
-    debugger
+
     return (
         <Header data={props}/>
     )
@@ -51,5 +51,5 @@ const MapStateToProps = (state:RootStateType ):MSTPStateType => ({
     login: state.auth.login
 })
 
-debugger
+
 export default connect (MapStateToProps, {setAuthUserData}) (HeaderContainer)
