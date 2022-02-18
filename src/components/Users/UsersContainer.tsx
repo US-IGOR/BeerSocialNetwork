@@ -12,7 +12,7 @@ import {
     userType
 } from "../../Redux/UsersReducer";
 import {Preloader} from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type mapStateToPropsType = {
     users: Array<userType>,
@@ -40,7 +40,7 @@ class UserContainer extends React.Component<any> {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        getUsers(this.props.currentPage,this.props.pageSize).then(data => {
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(data => {
                 this.props.setIsFetching(false);
                 this.props.setUsers(data.items);
                 this.props.setTotalUsersCount(data.totalCount);
@@ -51,7 +51,7 @@ class UserContainer extends React.Component<any> {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true);
 
-        getUsers(pageNumber,this.props.pageSize)
+        usersAPI.getUsers(pageNumber,this.props.pageSize)
             .then(data => {
                 this.props.setIsFetching(false);
                 this.props.setUsers(

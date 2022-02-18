@@ -59,7 +59,7 @@ export const Users = (props: usersType) => {
                                         },
                                     )
                                         .then(response => {
-                                            if (response.data.resultCode ===1) {
+                                            if (response.data.resultCode ===0) {
                                                 props.unFollow(m.id)
                                             }
                                         })
