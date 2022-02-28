@@ -1,5 +1,6 @@
+import {usersAPI} from "../api/api";
+
 export let ava1= 'https://frm-wows-us.wgcdn.co/wows_forum_us/monthly_2017_08/59a05a0db46c4_Futurama----1244575.thumb.jpeg.1fa6d51764ec3b5cb9f5e887ba30aa85.jpeg'
-export let ava3= 'https://www.kindpng.com/picc/m/727-7271359_philip-j-fry-avatar-hd-png-download.png'
 export let ava2= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR9T6w_LTm2OWy3DBwvsxeD5onAccBhlO_rQ&usqp=CAU'
 export let ava4= 'https://upload.wikimedia.org/wikipedia/uk/d/db/%D0%96%D1%83%D0%B9%D0%BA%D0%B0_%28%D0%A4%D1%83%D1%82%D1%83%D1%80%D0%B0%D0%BC%D0%B0%29.jpg'
 
@@ -11,8 +12,8 @@ const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const SET_IS_FETCHING = 'SET-IS-FETCHING';
 const SET_IS_FETCHING_PROGRESS = 'SET-IS-FETCHING-PROGRESS';
 
-export type actionsProfileReducerTypes = ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+export type actionsProfileReducerTypes = ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
@@ -124,13 +125,54 @@ const UsersReducer = (state: initialStateType = initialState, action: actionsPro
     }
 }
 
-export const follow = (userId: number) => ({type: FOLLOW, userId} as const)
-export const unfollow = (userId: number) => ({type: UNFOLLOW, userId} as const)
+export const followSuccess = (userId: number) => ({type: FOLLOW, userId} as const)
+export const unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsers = (users: Array<userType>) => ({type: SET_USERS,users} as const)
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE,currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT,totalCount} as const)
 export const setIsFetching = (isFetching:boolean) => ({type: SET_IS_FETCHING,isFetching} as const)
 export const setIsFetchingProgress = (followingInProgress:boolean,userId: number) => ({type: SET_IS_FETCHING_PROGRESS,followingInProgress,userId} as const)
+
+ export const getUsers = (currentPage:any, pageSize:any)=> {
+    return (dispatch:any) => {
+         dispatch(setIsFetching(true));
+         usersAPI.getUsers(currentPage,pageSize).then(data => {
+             dispatch(setIsFetching(false));
+             dispatch(setUsers(data.items));
+             dispatch(setTotalUsersCount(data.totalCount));
+         })
+     }
+
+ }
+
+export const follow = (userId:number)=> {
+    return (dispatch:any) => {
+        dispatch.setIsFetchingProgress(true,userId);
+        usersAPI.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(setIsFetchingProgress(false,userId));
+            })
+    }
+
+}
+
+
+export const unFollow = (userId:number)=> {
+    return (dispatch:any) => {
+        dispatch.setIsFetchingProgress(true,userId);
+        usersAPI.unFollow(userId)
+            .then(response => {
+                if (response.data.resultCode ===0) {
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(setIsFetchingProgress(false, userId));
+            })
+    }
+
+}
 
 
 
