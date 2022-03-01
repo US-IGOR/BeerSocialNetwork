@@ -145,11 +145,13 @@ export const setIsFetchingProgress = (followingInProgress:boolean,userId: number
 
  }
 
-export const follow = (userId:number)=> {
+export const followThunk = (userId:number)=> {
     return (dispatch:any) => {
-        dispatch.setIsFetchingProgress(true,userId);
+        dispatch(setIsFetchingProgress(true,userId));
+        debugger
         usersAPI.follow(userId)
             .then(response => {
+                debugger
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
                 }
@@ -160,9 +162,9 @@ export const follow = (userId:number)=> {
 }
 
 
-export const unFollow = (userId:number)=> {
+export const unFollowThunk = (userId:number)=> {
     return (dispatch:any) => {
-        dispatch.setIsFetchingProgress(true,userId);
+        dispatch(setIsFetchingProgress(true,userId));
         usersAPI.unFollow(userId)
             .then(response => {
                 if (response.data.resultCode ===0) {
