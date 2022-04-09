@@ -1,43 +1,32 @@
 import React, {useEffect} from 'react';
 import {Header} from "./Header";
 import axios from "axios";
-import { connect } from 'react-redux';
-import {setAuthUserData} from "../../Redux/AuthRedicer";
+import {connect, useDispatch} from 'react-redux';
+import {getAuthUserDataTC, setAuthUserData} from "../../Redux/AuthRedicer";
 import {RootStateType} from "../../Redux/Store";
+import {authAPI} from "../../api/api";
 
 
 type MSTPStateType = {
-    isAuth:boolean,
-    login:string | null
+    isAuth: boolean,
+    login: string | null
 }
 
 
 type MSTPType = {
-        isAuth: any
-        login: any
+    isAuth: any
+    login: any
 }
 type MDTPType = {
-    setAuthUserData: (id:number,login:string,email:string)=>void
+    setAuthUserData: (id: number, login: string, email: string) => void
 }
 type PropsType = MSTPType & MDTPType
 
 
-
-const HeaderContainer = (props:PropsType )=> {
-
+const HeaderContainer = (props: PropsType) => {
+    const dispatch = useDispatch()
     useEffect(() => {
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials:true})
-            .then(response => {
-
-              if (response.data.resultCode === 0) {
-
-                  let {id,login,email} = response.data.data;
-                  props.setAuthUserData(id,login,email)
-
-
-              }
-            })
+        dispatch(getAuthUserDataTC())
     }, [])
 
 
@@ -46,10 +35,10 @@ const HeaderContainer = (props:PropsType )=> {
     )
 }
 
-const MapStateToProps = (state:RootStateType ):MSTPStateType => ({
-    isAuth: state.auth.isAuth ,
+const MapStateToProps = (state: RootStateType): MSTPStateType => ({
+    isAuth: state.auth.isAuth,
     login: state.auth.login
 })
 
 
-export default connect (MapStateToProps, {setAuthUserData}) (HeaderContainer)
+export default connect(MapStateToProps, {setAuthUserData})(HeaderContainer)

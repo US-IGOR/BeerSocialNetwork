@@ -148,10 +148,8 @@ export const setIsFetchingProgress = (followingInProgress:boolean,userId: number
 export const followThunk = (userId:number)=> {
     return (dispatch:any) => {
         dispatch(setIsFetchingProgress(true,userId));
-        debugger
         usersAPI.follow(userId)
             .then(response => {
-                debugger
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
                 }

@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
-import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/ProfileReducer";
+import {connect, useDispatch} from "react-redux";
+import {getUserProfile} from "../../Redux/ProfileReducer";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
-
 import {RootStateType} from "../../Redux/Store";
+
+
 
 type contactsType = {
     github: string
@@ -36,7 +36,7 @@ type MSTPType = {
     profile: ProfileType
 }
 type MDTPType = {
-    setUserProfile: (profile: ProfileType) => void
+    setUserProfile?: (profile: ProfileType) => void
 }
 type OwnPropsType = MSTPType & MDTPType
 type PathParamsType = {
@@ -45,18 +45,11 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
-function ProfileContainer(props: PropsType) {
-
+export function ProfileContainer(props: PropsType) {
+const dispatch = useDispatch()
     useEffect(() => {
         let userId = props.match.params.userId;
-        if (!userId) {
-            userId = "2"
-        }
-        ;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                props.setUserProfile(response.data)
-            })
+        dispatch (getUserProfile(Number(userId)))
     }, [])
     return (
         <Profile profile={props.profile}/>
@@ -69,27 +62,5 @@ let mapStateToProps = (state: RootStateType): MSTPType => ({
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps)(WithUrlDataContainerComponent)
 
-
-/*
-
-class ProfileContainer extends React.Component<any> {
-    componentDidMount() {
-
-        let userId = this.props.match.params.userId;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setUserProfile(response.data);
-            })
-    }
-    render() {
-        {
-        }
-        return (<Profile
-            {...this.props}
-            props={this.props.profile}
-        />)
-    }
-}
-*/

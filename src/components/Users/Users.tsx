@@ -13,8 +13,8 @@ type usersType = {
     setCurrentPage: number
     changedCurrentPageHandler: (p: number) => void
     users: Array<userType>
-    follow: any
-    unFollow: any
+    follow: (a:any)=>void
+    unFollow: (a:any)=>void
 //  setIsFetchingProgress: (followingInProgress: boolean, id: number) => void
    followingInProgress: []
 
@@ -37,7 +37,6 @@ export const Users = (props: usersType) => {
                                  onClick={() => {
 
                                      props.changedCurrentPageHandler(p)
-                                     debugger
                                  }}
                     >{p + ','}</span>
                 })}

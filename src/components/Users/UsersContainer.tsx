@@ -54,7 +54,8 @@ class UserContainer extends React.Component<any> {
         this.props.getUsersThunkCreator(pageNumber) ;
         console.log(this.props.getUsersThunkCreator(pageNumber))
         console.log(pageNumber)
-        debugger
+
+
     /*
      this.props.setCurrentPage(pageNumber)
      this.props.setIsFetching(true);
