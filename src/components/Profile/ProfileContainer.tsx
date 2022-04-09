@@ -34,6 +34,7 @@ type ProfileType = null | {
 
 type MSTPType = {
     profile: ProfileType
+    isAuth: boolean
 }
 type MDTPType = {
     setUserProfile?: (profile: ProfileType) => void
@@ -52,12 +53,13 @@ const dispatch = useDispatch()
         dispatch (getUserProfile(Number(userId)))
     }, [])
     return (
-        <Profile profile={props.profile}/>
+        <Profile profile={props.profile} isAuth={props.isAuth}/>
     )
 }
 
 let mapStateToProps = (state: RootStateType): MSTPType => ({
-    profile: state.postPage.profile
+    profile: state.postPage.profile,
+    isAuth: state.auth.isAuth
 })
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);

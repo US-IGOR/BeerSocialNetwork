@@ -3,6 +3,7 @@ import s from './Messages.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagesText} from "./MessagesText/MessagesText";
 import {MessagesPropsType} from "./MessagesContainer";
+import {Redirect} from "react-router-dom";
 
 
 const Messages = (props: MessagesPropsType) => {
@@ -20,6 +21,9 @@ const Messages = (props: MessagesPropsType) => {
         props.updMessageBody(bodyMessage)
 
     }
+
+   if (!props.isAuth)  return <Redirect to={'login'}/>
+
 
     return (
         <div>

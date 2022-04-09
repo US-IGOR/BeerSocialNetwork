@@ -8,17 +8,17 @@ const SET_USER_DATA = 'SET-USER-DATA';
 
 
 let initialState = {
-        id: null,
-        email: null,
-        login: null,
-    isAuth:false
+    id: null,
+    email: null,
+    login: null,
+    isAuth: false
 };
 
 type initialStateType = {
     id: null | number
     email: null | string
     login: null | string
-    isAuth:boolean
+    isAuth: boolean
 };
 
 //export type  userDataType = typeof initialState;
@@ -30,8 +30,8 @@ const authReducer = (state: initialStateType = initialState, action: any): initi
 
             return {
                 ...state,
-               ...action.data,
-                isAuth:true
+                ...action.data,
+                isAuth: true
 
             };
 
@@ -45,18 +45,16 @@ const authReducer = (state: initialStateType = initialState, action: any): initi
 }
 
 
-
-
-export const setAuthUserData = (id:number,login:string,email:string) => (
+export const setAuthUserData = (id: number, login: string, email: string) => (
     {
         type: SET_USER_DATA,
-        data: {id,login,email}
+        data: {id, login, email}
 
     } as const
 
 )
 
-export const getAuthUserDataTC = () => (dispatch:any) => {
+export const getAuthUserDataTC = () => (dispatch: any) => {
     authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {

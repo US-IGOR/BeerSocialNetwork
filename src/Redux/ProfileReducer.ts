@@ -71,11 +71,11 @@ export const addPostAC = () => ({type: ADD_POST} as const)
 export const updNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT,updNewPostText: text} as const)
 const setUserProfile = (p: any) => ({type: SET_USER_PROFILE,profile:p} as const)
 export const getUserProfile = (userId: number) =>  (dispatch:any) => {
-    debugger
+
     usersAPI.getProfile(userId)
         .then(response => {
           dispatch(setUserProfile(response.data))
-            debugger
+
         })
 }
 
