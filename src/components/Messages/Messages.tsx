@@ -22,7 +22,7 @@ const Messages = (props: MessagesPropsType) => {
 
     }
 
-   if (!props.isAuth)  return <Redirect to={'login'}/>
+
 
 
     return (

@@ -4,6 +4,8 @@ import Messages from "./Messages";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
+import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
 
 type mapStateToPropsType = {
     messagePage: messagePageType
@@ -24,6 +26,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+
     return {
         updMessageBody: (bodyMessage: string) => {
             dispatch(updMessageBodyAC(bodyMessage))
@@ -35,7 +38,10 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
+
+let AuthRedirectComponent = withAuthRedirect (Messages)
+
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 
 export default MessagesContainer;

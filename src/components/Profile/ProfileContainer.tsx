@@ -2,9 +2,11 @@ import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import {connect, useDispatch} from "react-redux";
 import {getUserProfile} from "../../Redux/ProfileReducer";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {RootStateType} from "../../Redux/Store";
+import Messages from "../Messages/Messages";
+import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
 
 
 
@@ -33,8 +35,8 @@ type ProfileType = null | {
 }
 
 type MSTPType = {
-    profile: ProfileType
-    isAuth: boolean
+    profile?: ProfileType
+    isAuth?: boolean
 }
 type MDTPType = {
     setUserProfile?: (profile: ProfileType) => void
@@ -57,12 +59,30 @@ const dispatch = useDispatch()
     )
 }
 
+
+
+
+
+
+
+
+
+
+let AuthRedirectComponent = withAuthRedirect (ProfileContainer)
+
+
 let mapStateToProps = (state: RootStateType): MSTPType => ({
-    profile: state.postPage.profile,
+    profile: state.postPage.profile
+})
+let mapStateToPropsForRiderect = (state: RootStateType): MSTPType => ({
     isAuth: state.auth.isAuth
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
+AuthRedirectComponent=connect(mapStateToPropsForRiderect)(AuthRedirectComponent)
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 export default connect(mapStateToProps)(WithUrlDataContainerComponent)
+
+
+
 
