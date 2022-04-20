@@ -60,14 +60,6 @@ const dispatch = useDispatch()
 }
 
 
-
-
-
-
-
-
-
-
 let AuthRedirectComponent = withAuthRedirect (ProfileContainer)
 
 

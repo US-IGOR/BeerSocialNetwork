@@ -13,6 +13,7 @@ import {
 } from "../../Redux/UsersReducer";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
 
 type mapStateToPropsType = {
     users: Array<userType>,
@@ -105,6 +106,9 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 }
 
 
+let withRedirect = withAuthRedirect(UserContainer)
+
+
 export const UsersContainer = connect(mapStateToProps, {
     followThunk,
     unFollowThunk,
@@ -114,7 +118,7 @@ export const UsersContainer = connect(mapStateToProps, {
  //   setIsFetching,
     getUsersThunkCreator: getUsers,  //<---ThunkCreator
     setIsFetchingProgress
-})(UserContainer);
+})(withRedirect);
 
 
 
