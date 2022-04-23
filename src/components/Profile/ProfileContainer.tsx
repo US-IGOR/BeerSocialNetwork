@@ -7,7 +7,7 @@ import {RouteComponentProps} from "react-router";
 import {RootStateType} from "../../Redux/Store";
 import Messages from "../Messages/Messages";
 import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
-
+import {compose} from "redux";
 
 
 type contactsType = {
@@ -48,33 +48,22 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
-export function     ProfileContainer(props: PropsType) {
-const dispatch = useDispatch()
+function ProfileContainer(props: PropsType) {
+    const dispatch = useDispatch()
     useEffect(() => {
         let userId = props.match.params.userId;
-        dispatch (getUserProfile(Number(userId)))
+        dispatch(getUserProfile(Number(userId)))
     }, [])
     return (
-        <Profile profile={props.profile} isAuth={props.isAuth}/>
+        <Profile profile={props.profile} isAuth={!props.isAuth}/>
     )
 }
 
 
-let AuthRedirectComponent = withAuthRedirect (ProfileContainer)
-
-
-let mapStateToProps = (state: RootStateType): MSTPType => ({
-    profile: state.postPage.profile
-})
-let mapStateToPropsForRiderect = (state: RootStateType): MSTPType => ({
-    isAuth: state.auth.isAuth
-})
-
-
-AuthRedirectComponent=connect(mapStateToPropsForRiderect)(AuthRedirectComponent)
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-export default connect(mapStateToProps)(WithUrlDataContainerComponent)
-
-
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
 

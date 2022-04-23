@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Route} from "react-router-dom";
 import {Top10} from "./components/Top10/Top10";
@@ -48,8 +47,7 @@ const App = () => {
 
                 <div className='app_wraper_content'>
                     <Route path={'/profile/:userId?'} // '?'  options
-                           render={() =>
-                               <ProfileContainer/>}/>
+                           render={() => <ProfileContainer/>}/>
                     <Route path={'/messages'}
                            render={() =>
                                <MessagesContainer/>

@@ -36,11 +36,7 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-
-
-
 let AuthRedirectComponent = withAuthRedirect (Messages)
-
 const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 
@@ -48,9 +44,3 @@ export default MessagesContainer;
 
 
 
-
-/*
-compose (
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
-)(Messages)*/
