@@ -6,6 +6,9 @@ import authReducer from "./AuthRedicer";
 import thunkMiddleware from 'redux-thunk';
 //import thunk from "redux-thunk";
 
+
+export type AppStateType = ReturnType<typeof rootReducer>;
+
 let rootReducer = combineReducers({
  postPage : ProfileReducer,
  messagePage : MessageReducer,
@@ -18,7 +21,7 @@ let rootReducer = combineReducers({
  let store = createStore(rootReducer,applyMiddleware(thunkMiddleware));
 
 
-export type AppStateType = ReturnType<typeof rootReducer>;
+
 
 
 // @ts-ignore

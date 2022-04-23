@@ -48,7 +48,7 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 
-export function ProfileContainer(props: PropsType) {
+export function     ProfileContainer(props: PropsType) {
 const dispatch = useDispatch()
     useEffect(() => {
         let userId = props.match.params.userId;
