@@ -53,17 +53,23 @@ function ProfileContainer(props: PropsType) {
     useEffect(() => {
         let userId = props.match.params.userId;
         dispatch(getUserProfile(Number(userId)))
+        debugger
     }, [])
     return (
         <Profile profile={props.profile} isAuth={!props.isAuth}/>
     )
 }
 
+let mapStateToProps = (state: RootStateType): MSTPType => ({
+    profile: state.postPage.profile
+})
+
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+
     withRouter,
-    withAuthRedirect
+    withAuthRedirect,
+        connect (mapStateToProps)
 )(ProfileContainer)
 
 

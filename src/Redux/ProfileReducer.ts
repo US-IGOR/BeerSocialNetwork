@@ -57,7 +57,7 @@ const ProfileReducer = (state: postPageType = initialState, action: actionsProfi
         }
 
         case SET_USER_PROFILE : {
-
+debugger
             return { ...state,  profile: action.profile   }
 
         }
@@ -75,6 +75,7 @@ export const getUserProfile = (userId: number) =>  (dispatch:any) => {
     usersAPI.getProfile(userId)
         .then(response => {
           dispatch(setUserProfile(response.data))
+            debugger
 
         })
 }
