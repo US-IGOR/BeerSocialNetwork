@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import {connect, useDispatch} from "react-redux";
-import {getUserProfile} from "../../Redux/ProfileReducer";
-import {Redirect, withRouter} from "react-router-dom";
+
+import { withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {RootStateType} from "../../Redux/Store";
-import Messages from "../Messages/Messages";
 import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
 import {compose} from "redux";
+import {getUserProfile, getUserStatus} from "../../Redux/ProfileReducer";
 
 
 type contactsType = {
@@ -54,15 +54,16 @@ function ProfileContainer(props: PropsType) {
     useEffect(() => {
         let userId = props.match.params.userId;
         dispatch(getUserProfile(Number(userId)))
-        debugger
+        dispatch(getUserStatus(Number(userId)))
     }, [])
     return (
-        <Profile profile={props.profile} isAuth={!props.isAuth}/>
+        <Profile profile={props.profile}  isAuth={!props.isAuth}/>
     )
 }
 
 let mapStateToProps = (state: RootStateType): MSTPType => ({
-    profile: state.postPage.profile
+    profile: state.postPage.profile,
+
 })
 
 

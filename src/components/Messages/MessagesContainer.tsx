@@ -4,7 +4,6 @@ import Messages from "./Messages";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/reduxStore";
 import {compose, Dispatch} from "redux";
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/whithAuthRedirect";
 
 type mapStateToPropsType = {

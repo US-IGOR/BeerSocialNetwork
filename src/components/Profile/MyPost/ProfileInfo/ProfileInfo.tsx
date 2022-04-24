@@ -12,6 +12,7 @@ type ProfileInfoType = {
 
 export const ProfileInfo = (props:ProfileInfoType) => {
   //  if (props.profile == null || props.profile)
+    debugger
    if (!props.profile)
   {
       return <Preloader/>
@@ -26,7 +27,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
                <div className={s.avaDiscription}>
                    <img src={props.profile.photos.small}/>
 
-                   <ProfileStatus status={'чык чырык'}/>
+                   <ProfileStatus status={props.profile.status}/>
 
                    <div>
                        <div>ФИО: {props.profile.fullName}</div>
