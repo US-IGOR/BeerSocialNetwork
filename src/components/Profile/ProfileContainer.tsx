@@ -50,6 +50,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 function ProfileContainer(props: PropsType) {
     const dispatch = useDispatch()
+
     useEffect(() => {
         let userId = props.match.params.userId;
         dispatch(getUserProfile(Number(userId)))
